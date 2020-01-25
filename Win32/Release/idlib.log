@@ -1,4 +1,4 @@
-﻿Build started 1/24/2020 11:51:08 PM.
+﻿Build started 1/25/2020 12:09:13 AM.
      1>Project "C:\Users\PC\test\q4\Game-Mod-Q4\idlib.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (../Win32/Release\) contains files shared from another project (Game.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>Lib:
@@ -7,4 +7,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.23
+Time Elapsed 00:00:00.43

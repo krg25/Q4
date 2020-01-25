@@ -1,19 +1,8 @@
-﻿Build started 1/24/2020 11:51:08 PM.
+﻿Build started 1/25/2020 12:09:14 AM.
      1>Project "C:\Users\PC\test\q4\Game-Mod-Q4\game.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (../Win32/Release\) contains files shared from another project (idLib.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /Ox /Ob1 /Oi /Oy- /D NDEBUG /D _WINDOWS /D _FINAL /D GAME_DLL /D Q4SDK /D _WINDLL /D _MBCS /GF /Gm- /EHsc /MT /GS- /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /GR /Yu /Fp"../Win32/Release\Game/Game.pch" /Fo"../Win32/Release\Game/" /Fd"../Win32/Release\Gamex86.pdb" /Gd /TP /analyze- /errorReport:prompt game\Actor.cpp game\LipSync.cpp game\ai\AAS_routing.cpp game\ai\Monster_Fatty.cpp game\ai\Monster_TurretFlying.cpp game\gamesys\SysCmds.cpp game\gamesys\SysCvar.cpp game\physics\Force_Constant.cpp game\script\Script_Compiler.cpp
-         Actor.cpp
-         LipSync.cpp
-         AAS_routing.cpp
-     1>game\ai\AAS_routing.cpp(2): warning C4627: '#include "../../idlib/precompiled.h"': skipped when looking for precompiled header use
-                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
-         Monster_Fatty.cpp
-     1>game\ai\Monster_Fatty.cpp(9): warning C4627: '#include "../../idlib/precompiled.h"': skipped when looking for precompiled header use
-                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
-         Monster_TurretFlying.cpp
-     1>game\ai\Monster_TurretFlying.cpp(2): warning C4627: '#include "../../idlib/precompiled.h"': skipped when looking for precompiled header use
-                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W4 /WX- /Ox /Ob1 /Oi /Oy- /D NDEBUG /D _WINDOWS /D _FINAL /D GAME_DLL /D Q4SDK /D _WINDLL /D _MBCS /GF /Gm- /EHsc /MT /GS- /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /GR /Yu /Fp"../Win32/Release\Game/Game.pch" /Fo"../Win32/Release\Game/" /Fd"../Win32/Release\Gamex86.pdb" /Gd /TP /analyze- /errorReport:prompt game\gamesys\SysCmds.cpp
          SysCmds.cpp
      1>game\gamesys\SysCmds.cpp(2): warning C4627: '#include "../../idlib/precompiled.h"': skipped when looking for precompiled header use
                  Add directive to 'precompiled header (.h) file' or rebuild precompiled header
@@ -21,28 +10,6 @@
                  C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(304) : see declaration of 'sscanf'
      1>game\gamesys\SysCmds.cpp(1698): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(356) : see declaration of 'sprintf'
-         SysCvar.cpp
-     1>game\gamesys\SysCvar.cpp(1): warning C4627: '#include "../../idlib/precompiled.h"': skipped when looking for precompiled header use
-                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
-     1>game\gamesys\SysCvar.cpp(35): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(356) : see declaration of 'sprintf'
-         Force_Constant.cpp
-     1>game\physics\Force_Constant.cpp(2): warning C4627: '#include "../../idlib/precompiled.h"': skipped when looking for precompiled header use
-                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
-         Script_Compiler.cpp
-     1>game\script\Script_Compiler.cpp(2): warning C4627: '#include "../../idlib/precompiled.h"': skipped when looking for precompiled header use
-                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
-     1>game\script\Script_Compiler.cpp(226): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(356) : see declaration of 'vsprintf'
-     1>game\script\Script_Compiler.cpp(244): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(356) : see declaration of 'vsprintf'
-         Generating Code...
-     1>c:\users\pc\test\q4\game-mod-q4\game\script\script_compiler.cpp(347): warning C4702: unreachable code
-     1>c:\users\pc\test\q4\game-mod-q4\game\script\script_compiler.cpp(1008): warning C4702: unreachable code
-     1>c:\users\pc\test\q4\game-mod-q4\game\script\script_compiler.cpp(1302): warning C4702: unreachable code
-     1>c:\users\pc\test\q4\game-mod-q4\game\script\script_compiler.cpp(1336): warning C4702: unreachable code
-     1>c:\users\pc\test\q4\game-mod-q4\game\script\script_compiler.cpp(1347): warning C4702: unreachable code
-     1>c:\users\pc\test\q4\game-mod-q4\game\script\script_compiler.cpp(1379): warning C4702: unreachable code
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(1186,5): warning MSB8012: TargetPath(C:\Users\PC\test\q4\Game-Mod-Q4\../Win32/Release\Game.dll) does not match the Linker's OutputFile property value (C:\Users\PC\test\q4\Win32\Release\Gamex86.dll). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(1188,5): warning MSB8012: TargetName(Game) does not match the Linker's OutputFile property value (Gamex86). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
        Link:
@@ -212,4 +179,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:06.94
+Time Elapsed 00:00:05.76

@@ -7,9 +7,6 @@
     <Filter Include="idLib\BV">
       <UniqueIdentifier>{a9742ed6-9538-48e3-999d-fcf3aec1f7b3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="idLib\Containers">
-      <UniqueIdentifier>{788f5bb5-a6a6-47fa-938d-839545c1c722}</UniqueIdentifier>
-    </Filter>
     <Filter Include="idLib\Geometry">
       <UniqueIdentifier>{f5076342-98f6-4299-a331-29fe7c20d35f}</UniqueIdentifier>
     </Filter>
@@ -24,6 +21,9 @@
     </Filter>
     <Filter Include="idLib\Algorithms">
       <UniqueIdentifier>{dd4c9f33-3261-4292-9a64-dbefec1aad70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="idLib\Algorithms\Containers">
+      <UniqueIdentifier>{788f5bb5-a6a6-47fa-938d-839545c1c722}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -100,52 +100,52 @@
       <Filter>idLib\BV</Filter>
     </ClInclude>
     <ClInclude Include="idlib\containers\BinSearch.h">
-      <Filter>idLib\Containers</Filter>
+      <Filter>idLib\Algorithms\Containers</Filter>
     </ClInclude>
     <ClInclude Include="idlib\BTree.h">
-      <Filter>idLib\Containers</Filter>
+      <Filter>idLib\Algorithms\Containers</Filter>
     </ClInclude>
     <ClInclude Include="idlib\containers\HashIndex.h">
-      <Filter>idLib\Containers</Filter>
+      <Filter>idLib\Algorithms\Containers</Filter>
     </ClInclude>
     <ClInclude Include="idlib\containers\HashTable.h">
-      <Filter>idLib\Containers</Filter>
+      <Filter>idLib\Algorithms\Containers</Filter>
     </ClInclude>
     <ClInclude Include="idlib\containers\Hierarchy.h">
-      <Filter>idLib\Containers</Filter>
+      <Filter>idLib\Algorithms\Containers</Filter>
     </ClInclude>
     <ClInclude Include="idlib\containers\LinkList.h">
-      <Filter>idLib\Containers</Filter>
+      <Filter>idLib\Algorithms\Containers</Filter>
     </ClInclude>
     <ClInclude Include="idlib\containers\List.h">
-      <Filter>idLib\Containers</Filter>
+      <Filter>idLib\Algorithms\Containers</Filter>
     </ClInclude>
     <ClInclude Include="idlib\containers\Pair.h">
-      <Filter>idLib\Containers</Filter>
+      <Filter>idLib\Algorithms\Containers</Filter>
     </ClInclude>
     <ClInclude Include="idlib\containers\PlaneSet.h">
-      <Filter>idLib\Containers</Filter>
+      <Filter>idLib\Algorithms\Containers</Filter>
     </ClInclude>
     <ClInclude Include="idlib\containers\Queue.h">
-      <Filter>idLib\Containers</Filter>
+      <Filter>idLib\Algorithms\Containers</Filter>
     </ClInclude>
     <ClInclude Include="idlib\containers\rvBlockPool.h">
-      <Filter>idLib\Containers</Filter>
+      <Filter>idLib\Algorithms\Containers</Filter>
     </ClInclude>
     <ClInclude Include="idlib\containers\Stack.h">
-      <Filter>idLib\Containers</Filter>
+      <Filter>idLib\Algorithms\Containers</Filter>
     </ClInclude>
     <ClInclude Include="idlib\containers\StaticList.h">
-      <Filter>idLib\Containers</Filter>
+      <Filter>idLib\Algorithms\Containers</Filter>
     </ClInclude>
     <ClInclude Include="idlib\containers\StrList.h">
-      <Filter>idLib\Containers</Filter>
+      <Filter>idLib\Algorithms\Containers</Filter>
     </ClInclude>
     <ClInclude Include="idlib\containers\StrPool.h">
-      <Filter>idLib\Containers</Filter>
+      <Filter>idLib\Algorithms\Containers</Filter>
     </ClInclude>
     <ClInclude Include="idlib\containers\VectorSet.h">
-      <Filter>idLib\Containers</Filter>
+      <Filter>idLib\Algorithms\Containers</Filter>
     </ClInclude>
     <ClInclude Include="idlib\geometry\DrawVert.h">
       <Filter>idLib\Geometry</Filter>
@@ -351,7 +351,7 @@
       <Filter>idLib\BV</Filter>
     </ClCompile>
     <ClCompile Include="idlib\containers\HashIndex.cpp">
-      <Filter>idLib\Containers</Filter>
+      <Filter>idLib\Algorithms\Containers</Filter>
     </ClCompile>
     <ClCompile Include="idlib\geometry\JointTransform.cpp">
       <Filter>idLib\Geometry</Filter>
