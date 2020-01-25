@@ -1,0 +1,181 @@
+﻿Build started 1/24/2020 10:27:11 PM.
+     1>Project "C:\Users\PC\test\q4\Game-Mod-Q4\game.vcxproj" on node 2 (Build target(s)).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (../Win32/Debug\) contains files shared from another project (idLib.vcxproj, MPGame.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W4 /WX- /Od /Oy- /D _DEBUG /D _WINDOWS /D GAME_DLL /D Q4SDK /D _WINDLL /D _MBCS /Gm- /EHsc /RTC1 /MTd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /GR /Yu /Fp"../Win32/Debug\Game/Game.pch" /Fo"../Win32/Debug\Game/" /Fd"../Win32/Debug\Gamex86.pdb" /Gd /TP /analyze- /errorReport:prompt game\gamesys\SysCmds.cpp
+         SysCmds.cpp
+     1>c:\users\pc\test\q4\game-mod-q4\game\gamesys\syscmds.cpp(2): warning C4627: '#include "../../idlib/precompiled.h"': skipped when looking for precompiled header use
+                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
+     1>c:\users\pc\test\q4\game-mod-q4\game\gamesys\syscmds.cpp(814): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
+     1>c:\users\pc\test\q4\game-mod-q4\game\gamesys\syscmds.cpp(1680): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(1186,5): warning MSB8012: TargetPath(C:\Users\PC\test\q4\Game-Mod-Q4\../Win32/Debug\Game.dll) does not match the Linker's OutputFile property value (C:\Users\PC\test\q4\Win32\Debug\Gamex86.dll). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(1188,5): warning MSB8012: TargetName(Game) does not match the Linker's OutputFile property value (Gamex86). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"../Win32/Debug\Gamex86.dll" /INCREMENTAL /NOLOGO ../Win32/Debug\idLib.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /DEF:".\game\game.def" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"../Win32/Debug\Gamex86.pdb" /STACK:"16000000","16000000" /LARGEADDRESSAWARE /TLBID:1 /BASE:"0x20000000" /DYNAMICBASE /NXCOMPAT /MACHINE:X86 /SAFESEH /FIXED:no /DLL ../Win32/Debug\Game/Actor.obj
+         ../Win32/Debug\Game/AF.obj
+         ../Win32/Debug\Game/AFEntity.obj
+         ../Win32/Debug\Game/BrittleFracture.obj
+         ../Win32/Debug\Game/Camera.obj
+         ../Win32/Debug\Game/ClientAFEntity.obj
+         ../Win32/Debug\Game/Effect.obj
+         ../Win32/Debug\Game/Entity.obj
+         ../Win32/Debug\Game/FreeView.obj
+         ../Win32/Debug\Game/Game_Debug.obj
+         ../Win32/Debug\Game/Game_local.obj
+         ../Win32/Debug\Game/Game_Log.obj
+         ../Win32/Debug\Game/Game_network.obj
+         ../Win32/Debug\Game/GameEdit.obj
+         ../Win32/Debug\Game/Healing_Station.obj
+         ../Win32/Debug\Game/Icon.obj
+         ../Win32/Debug\Game/IconManager.obj
+         ../Win32/Debug\Game/IK.obj
+         ../Win32/Debug\Game/Instance.obj
+         ../Win32/Debug\Game/Item.obj
+         ../Win32/Debug\Game/Light.obj
+         ../Win32/Debug\Game/LipSync.obj
+         ../Win32/Debug\Game/Misc.obj
+         ../Win32/Debug\Game/Moveable.obj
+         ../Win32/Debug\Game/Mover.obj
+         ../Win32/Debug\Game/MultiplayerGame.obj
+         ../Win32/Debug\Game/Playback.obj
+         ../Win32/Debug\Game/Player_Cheats.obj
+         ../Win32/Debug\Game/Projectile.obj
+         ../Win32/Debug\Game/Pvs.obj
+         ../Win32/Debug\Game/SecurityCamera.obj
+         ../Win32/Debug\Game/Sound.obj
+         ../Win32/Debug\Game/SplineMover.obj
+         ../Win32/Debug\Game/Target.obj
+         ../Win32/Debug\Game/TramGate.obj
+         ../Win32/Debug\Game/Trigger.obj
+         ../Win32/Debug\Game/WorldSpawn.obj
+         ../Win32/Debug\Game/AAS.obj
+         ../Win32/Debug\Game/AAS_debug.obj
+         ../Win32/Debug\Game/AAS_Find.obj
+         ../Win32/Debug\Game/AAS_pathing.obj
+         ../Win32/Debug\Game/AAS_routing.obj
+         ../Win32/Debug\Game/AAS_tactical.obj
+         ../Win32/Debug\Game/AI.obj
+         ../Win32/Debug\Game/AI_Actions.obj
+         ../Win32/Debug\Game/AI_Announcements.obj
+         ../Win32/Debug\Game/AI_Debug.obj
+         ../Win32/Debug\Game/AI_events.obj
+         ../Win32/Debug\Game/AI_Manager.obj
+         ../Win32/Debug\Game/AI_Medic.obj
+         ../Win32/Debug\Game/AI_Move.obj
+         ../Win32/Debug\Game/AI_pathing.obj
+         ../Win32/Debug\Game/AI_States.obj
+         ../Win32/Debug\Game/AI_Tactical.obj
+         ../Win32/Debug\Game/AI_Util.obj
+         ../Win32/Debug\Game/Monster_Berserker.obj
+         ../Win32/Debug\Game/Monster_BossBuddy.obj
+         ../Win32/Debug\Game/Monster_BossMakron.obj
+         ../Win32/Debug\Game/Monster_ConvoyGround.obj
+         ../Win32/Debug\Game/Monster_ConvoyHover.obj
+         ../Win32/Debug\Game/Monster_FailedTransfer.obj
+         ../Win32/Debug\Game/Monster_Fatty.obj
+         ../Win32/Debug\Game/Monster_Gladiator.obj
+         ../Win32/Debug\Game/Monster_Grunt.obj
+         ../Win32/Debug\Game/Monster_Gunner.obj
+         ../Win32/Debug\Game/Monster_Harvester.obj
+         ../Win32/Debug\Game/Monster_HarvesterDispersal.obj
+         ../Win32/Debug\Game/Monster_HeavyHoverTank.obj
+         ../Win32/Debug\Game/Monster_IronMaiden.obj
+         ../Win32/Debug\Game/Monster_LightTank.obj
+         ../Win32/Debug\Game/Monster_NetworkGuardian.obj
+         ../Win32/Debug\Game/Monster_RepairBot.obj
+         ../Win32/Debug\Game/Monster_Scientist.obj
+         ../Win32/Debug\Game/Monster_Sentry.obj
+         ../Win32/Debug\Game/Monster_SlimyTransfer.obj
+         ../Win32/Debug\Game/Monster_StreamProtector.obj
+         ../Win32/Debug\Game/Monster_StroggFlyer.obj
+         ../Win32/Debug\Game/Monster_StroggHover.obj
+         ../Win32/Debug\Game/Monster_StroggMarine.obj
+         ../Win32/Debug\Game/Monster_TeleportDropper.obj
+         ../Win32/Debug\Game/Monster_Turret.obj
+         ../Win32/Debug\Game/Monster_TurretFlying.obj
+         ../Win32/Debug\Game/spawner.obj
+         ../Win32/Debug\Game/VehicleAI.obj
+         ../Win32/Debug\Game/Anim.obj
+         ../Win32/Debug\Game/Anim_Blend.obj
+         ../Win32/Debug\Game/Anim_Import.obj
+         ../Win32/Debug\Game/Anim_Testmodel.obj
+         ../Win32/Debug\Game/ClientEffect.obj
+         ../Win32/Debug\Game/ClientEntity.obj
+         ../Win32/Debug\Game/ClientModel.obj
+         ../Win32/Debug\Game/ClientMoveable.obj
+         ../Win32/Debug\Game/Class.obj
+         ../Win32/Debug\Game/DebugGraph.obj
+         ../Win32/Debug\Game/Event.obj
+         ../Win32/Debug\Game/SaveGame.obj
+         ../Win32/Debug\Game/State.obj
+         ../Win32/Debug\Game/SysCmds.obj
+         ../Win32/Debug\Game/SysCvar.obj
+         ../Win32/Debug\Game/Clip.obj
+         ../Win32/Debug\Game/Force.obj
+         ../Win32/Debug\Game/Force_Constant.obj
+         ../Win32/Debug\Game/Force_Drag.obj
+         ../Win32/Debug\Game/Force_Field.obj
+         ../Win32/Debug\Game/Force_Spring.obj
+         ../Win32/Debug\Game/Physics.obj
+         ../Win32/Debug\Game/Physics_Actor.obj
+         ../Win32/Debug\Game/Physics_AF.obj
+         ../Win32/Debug\Game/Physics_Base.obj
+         ../Win32/Debug\Game/Physics_Monster.obj
+         ../Win32/Debug\Game/Physics_Parametric.obj
+         ../Win32/Debug\Game/Physics_Particle.obj
+         ../Win32/Debug\Game/Physics_Player.obj
+         ../Win32/Debug\Game/Physics_RigidBody.obj
+         ../Win32/Debug\Game/Physics_Static.obj
+         ../Win32/Debug\Game/Physics_StaticMulti.obj
+         ../Win32/Debug\Game/Physics_VehicleMonster.obj
+         ../Win32/Debug\Game/Push.obj
+         ../Win32/Debug\Game/Player.obj
+         ../Win32/Debug\Game/Player_States.obj
+         ../Win32/Debug\Game/PlayerView.obj
+         ../Win32/Debug\Game/Script_Compiler.obj
+         ../Win32/Debug\Game/Script_Interpreter.obj
+         ../Win32/Debug\Game/Script_Program.obj
+         ../Win32/Debug\Game/Script_Thread.obj
+         ../Win32/Debug\Game/ScriptFuncUtility.obj
+         ../Win32/Debug\Game/Vehicle.obj
+         ../Win32/Debug\Game/Vehicle_DropPod.obj
+         ../Win32/Debug\Game/Vehicle_Walker.obj
+         ../Win32/Debug\Game/VehicleAnimated.obj
+         ../Win32/Debug\Game/VehicleController.obj
+         ../Win32/Debug\Game/VehicleDriver.obj
+         ../Win32/Debug\Game/VehicleMonster.obj
+         ../Win32/Debug\Game/VehicleParts.obj
+         ../Win32/Debug\Game/VehiclePosition.obj
+         ../Win32/Debug\Game/VehicleRigid.obj
+         ../Win32/Debug\Game/VehicleSpline.obj
+         ../Win32/Debug\Game/VehicleStatic.obj
+         ../Win32/Debug\Game/Weapon.obj
+         ../Win32/Debug\Game/WeaponBlaster.obj
+         ../Win32/Debug\Game/WeaponDarkMatterGun.obj
+         ../Win32/Debug\Game/WeaponGauntlet.obj
+         ../Win32/Debug\Game/WeaponGrenadeLauncher.obj
+         ../Win32/Debug\Game/WeaponHyperblaster.obj
+         ../Win32/Debug\Game/WeaponLightningGun.obj
+         ../Win32/Debug\Game/WeaponMachinegun.obj
+         ../Win32/Debug\Game/WeaponNailgun.obj
+         ../Win32/Debug\Game/WeaponNapalmGun.obj
+         ../Win32/Debug\Game/WeaponRailgun.obj
+         ../Win32/Debug\Game/WeaponRocketLauncher.obj
+         ../Win32/Debug\Game/WeaponShotgun.obj
+         ../Win32/Debug\Game/Buying.obj
+         ../Win32/Debug\Game/CTF.obj
+         ../Win32/Debug\Game/GameState.obj
+         ../Win32/Debug\Game/Tourney.obj
+         ../Win32/Debug\Game/VoiceComms.obj
+         ../Win32/Debug\Game/StatEvent.obj
+         ../Win32/Debug\Game/StatManager.obj
+         ../Win32/Debug\Game/StatWindow.obj
+         C:\Users\PC\test\q4\Win32\Debug\idLib.lib
+         game.vcxproj -> C:\Users\PC\test\q4\Game-Mod-Q4\../Win32/Debug\Game.dll
+     1>Done Building Project "C:\Users\PC\test\q4\Game-Mod-Q4\game.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.80
