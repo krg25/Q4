@@ -3055,21 +3055,6 @@ void Cmd_CheckSave_f(const idCmdArgs &args);
 void Cmd_ShuffleTeams_f(const idCmdArgs& args) {
 	gameLocal.mpGame.ShuffleTeams();
 }
-
-#ifndef _FINAL
-void Cmd_ClientOverflowReliable_f(const idCmdArgs& args) {
-	idBitMsg	outMsg;
-	byte		msgBuf[114688];
-
-	for (int i = 0; i < 10; i++) {
-		outMsg.Init(msgBuf, sizeof(msgBuf));
-		outMsg.WriteByte(-1);
-		for (int j = 0; j < 8190; j++) {
-			outMsg.WriteByte(j);
-		}
-		networkSystem->ClientSendReliableMessage(outMsg);
-	}
-}
 void Cmd_Krg_f(const idCmdArgs &args) {
 	char		*msg;
 	idPlayer	*player;
@@ -3088,6 +3073,21 @@ void Cmd_Krg_f(const idCmdArgs &args) {
 
 	gameLocal.Printf("%s", msg);
 }
+#ifndef _FINAL
+void Cmd_ClientOverflowReliable_f(const idCmdArgs& args) {
+	idBitMsg	outMsg;
+	byte		msgBuf[114688];
+
+	for (int i = 0; i < 10; i++) {
+		outMsg.Init(msgBuf, sizeof(msgBuf));
+		outMsg.WriteByte(-1);
+		for (int j = 0; j < 8190; j++) {
+			outMsg.WriteByte(j);
+		}
+		networkSystem->ClientSendReliableMessage(outMsg);
+	}
+}
+
 
 #endif
 
