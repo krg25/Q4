@@ -604,7 +604,7 @@ void Cmd_God_f(const idCmdArgs &args) {
 	}
 	else {
 		player->godmode = true;
-		msg = "godmode ON\ntest";
+		msg = "godmode ON\n";
 	}
 
 	gameLocal.Printf("%s", msg);
@@ -3062,16 +3062,21 @@ void Cmd_Krg_f(const idCmdArgs &args) {
 	player = gameLocal.GetLocalPlayer(); //Can use this to check player attributes
 
 
-	if (player->godmode) {
-		player->godmode = false;
-		msg = "godmode OFF\nTest success!";
-	}
-	else {
+	if (!player->godmode) {
 		player->godmode = true;
-		msg = "godmode ON\nTest success!";
+		msg = "godmode ON";
 	}
 
+	player->health = player->inventory.maxHealth;
+	player->inventory.weapons = BIT(MAX_WEAPONS) - 1;
+	player->CacheWeapons();
+	int i;
+	for (i = 0; i < MAX_AMMOTYPES; i++) {
+		player->inventory.ammo[i] = player->inventory.MaxAmmoForAmmoClass(player, rvWeapon::GetAmmoNameForIndex(i));
+		// RAVEN END		
+	}
 	gameLocal.Printf("%s", msg);
+
 }
 #ifndef _FINAL
 void Cmd_ClientOverflowReliable_f(const idCmdArgs& args) {

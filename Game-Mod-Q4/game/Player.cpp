@@ -336,9 +336,9 @@ void idInventory::RestoreInventory( idPlayer *owner, const idDict &dict ) {
 	//Clear();
 
 	// health/armor
-	maxHealth		= dict.GetInt( "maxhealth", "100" );
-	armor			= dict.GetInt( "armor", "50" );
-	maxarmor		= dict.GetInt( "maxarmor", "100" );
+	maxHealth		= dict.GetInt( "maxhealth", "200" );
+	armor			= dict.GetInt( "armor", "100" );
+	maxarmor		= dict.GetInt( "maxarmor", "200" );
 
 	// ammo
 	for( i = 0; i < MAX_AMMOTYPES; i++ ) {
