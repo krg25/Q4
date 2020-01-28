@@ -80,9 +80,9 @@ entityDef weapon_shotgun
 	"joint_view_flashlight"		"flashlight"
 	"joint_world_flash"			"muzzle_flash"
 
-	"fireRate"				".02"
-	"spread"				"7"
-	"hitscans"				"10"
+	"fireRate"				".03"
+	"spread"				"14"
+	"hitscans"				"20"
 
 	"inv_weapon"				"weapon_shotgun"
 	"inv_start_ammo_shotgun"		"10"
@@ -338,7 +338,7 @@ entityDef hitscan_shotgun_pellet
 	"def_damage_flesh"			"damage_pellet"
 	// for multiplayer clients. we only sync the hitscan def
 	// must be the same as weapon_shotgun_mp
-	"hitscans"				"11"
+	"hitscans"				"20"
 }
 
 //--------------------------------------------------------------------------------------------------------------------
@@ -348,7 +348,7 @@ entityDef hitscan_shotgun_pellet
 entityDef damage_pellet
 {
 	"inherit"					"damage_bullet"
-	"damage"					"140"
+	"damage"					"20"
 
 	"splat_size"				"128"
 	

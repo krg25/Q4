@@ -695,10 +695,10 @@ entityDef player_marine
 	"weapon"						"weapon_blaster"
 	"current_weapon"					"0"
 
-	"pm_jumpheight"						"48"
+	"pm_jumpheight"						"136"
 	"pm_stepsize"						"16"
-	"pm_speed"						"160"  	//DOOM speed was 140
-	"pm_walkspeed"						"80"
+	"pm_speed"						"320"  	//DOOM speed was 140
+	"pm_walkspeed"						"160"
 	"pm_crouchspeed"					"80"
 	"pm_noclipspeed"					"270"	
 	"pm_minviewpitch"					"-89"	// looking up
@@ -747,7 +747,7 @@ entityDef player_marine
 	"max_ammo_shotgun"					"500"
 	"max_ammo_hyperblaster"					"400"
 	"max_ammo_napalmgun"					"40"
-	"max_ammo_rocketlauncher"				"40"
+	"max_ammo_rocketlauncher"				"800"
 	"max_ammo_grenadelauncher"				"50"
 	"max_ammo_lightninggun"					"400"
 	"max_ammo_dmg"						"25"

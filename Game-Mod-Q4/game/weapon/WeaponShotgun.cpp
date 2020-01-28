@@ -153,7 +153,7 @@ stateResult_t rvWeaponShotgun::State_Idle( const stateParms_t& parms ) {
 				SetStatus( WP_READY );
 			}
 		
-			PlayCycle( ANIMCHANNEL_ALL, "Idle", parms.blendFrames );
+			PlayCycle( ANIMCHANNEL_ALL, "idle", parms.blendFrames );
 			return SRESULT_STAGE ( STAGE_WAIT );
 		
 		case STAGE_WAIT:			
@@ -300,7 +300,7 @@ stateResult_t rvWeaponShotgun::State_Reload ( const stateParms_t& parms ) {
 				return SRESULT_DONE;
 			}
 			if ( AnimDone ( ANIMCHANNEL_ALL, 0 ) ) {
-				AddToClip( 1 );
+				AddToClip( 10 );
 				return SRESULT_STAGE ( STAGE_RELOADLOOP );
 			}
 			return SRESULT_WAIT;
