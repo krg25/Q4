@@ -334,7 +334,7 @@ void idInventory::RestoreInventory( idPlayer *owner, const idDict &dict ) {
 
 	//We might not need to clear it out.
 	//Clear();
-
+	//kgronemann
 	// health/armor
 	maxHealth		= dict.GetInt( "maxhealth", "200" );
 	armor			= dict.GetInt( "armor", "100" );

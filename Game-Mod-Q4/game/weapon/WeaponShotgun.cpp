@@ -21,12 +21,15 @@ public:
 
 protected:
 	int						hitscans;
+	bool				    UpdateFlashlight	(void);
+	void					Flashlight			(bool on);
 
 private:
 
 	stateResult_t		State_Idle		( const stateParms_t& parms );
 	stateResult_t		State_Fire		( const stateParms_t& parms );
 	stateResult_t		State_Reload	( const stateParms_t& parms );
+	stateResult_t		State_Flashlight( const stateParms_t& parms) ;
 	
 	CLASS_STATES_PROTOTYPE( rvWeaponShotgun );
 };
@@ -41,7 +44,36 @@ rvWeaponShotgun::rvWeaponShotgun
 */
 rvWeaponShotgun::rvWeaponShotgun( void ) {
 }
+/*
+================
+rvWeaponBlaster::Flashlight
+================
+*/
+void rvWeaponShotgun::Flashlight(bool on) {
+	owner->Flashlight(on);
 
+	if (on) {
+		worldModel->ShowSurface("models/weapons/blaster/flare");
+		viewModel->ShowSurface("models/weapons/blaster/flare");
+	}
+	else {
+		worldModel->HideSurface("models/weapons/blaster/flare");
+		viewModel->HideSurface("models/weapons/blaster/flare");
+	}
+}
+/*
+================
+rvWeaponBlaster::updateFlashlight(void)
+================
+*/
+bool rvWeaponShotgun::UpdateFlashlight(void) {
+	if (!wsfl.flashlight) {
+		return false;
+	}
+
+	SetState("Flashlight", 0);
+	return true;
+}
 /*
 ================
 rvWeaponShotgun::Spawn
@@ -50,7 +82,8 @@ rvWeaponShotgun::Spawn
 void rvWeaponShotgun::Spawn( void ) {
 	hitscans   = spawnArgs.GetFloat( "hitscans" );
 	
-	SetState( "Raise", 0 );	
+	SetState( "Idle", 0 );	
+	Flashlight(owner->IsFlashlightOn());
 }
 
 /*
@@ -99,6 +132,7 @@ CLASS_STATES_DECLARATION( rvWeaponShotgun )
 	STATE( "Idle",				rvWeaponShotgun::State_Idle)
 	STATE( "Fire",				rvWeaponShotgun::State_Fire )
 	STATE( "Reload",			rvWeaponShotgun::State_Reload )
+	STATE( "Flashlight",		rvWeaponShotgun::State_Flashlight)
 END_CLASS_STATES
 
 /*
@@ -119,7 +153,7 @@ stateResult_t rvWeaponShotgun::State_Idle( const stateParms_t& parms ) {
 				SetStatus( WP_READY );
 			}
 		
-			PlayCycle( ANIMCHANNEL_ALL, "idle", parms.blendFrames );
+			PlayCycle( ANIMCHANNEL_ALL, "Idle", parms.blendFrames );
 			return SRESULT_STAGE ( STAGE_WAIT );
 		
 		case STAGE_WAIT:			
@@ -127,6 +161,9 @@ stateResult_t rvWeaponShotgun::State_Idle( const stateParms_t& parms ) {
 				SetState( "Lower", 4 );
 				return SRESULT_DONE;
 			}		
+			if (UpdateFlashlight()) {
+				return SRESULT_DONE;
+			}
 			if ( !clipSize ) {
 				if ( gameLocal.time > nextAttackTime && wsfl.attack && AmmoAvailable ( ) ) {
 					SetState( "Fire", 0 );
@@ -150,6 +187,7 @@ stateResult_t rvWeaponShotgun::State_Idle( const stateParms_t& parms ) {
 	}
 	return SRESULT_ERROR;
 }
+
 
 /*
 ================
@@ -182,6 +220,9 @@ stateResult_t rvWeaponShotgun::State_Fire( const stateParms_t& parms ) {
 					SetState( "Reload", 4 );
 					return SRESULT_DONE;			
 				}				
+			}
+			if (UpdateFlashlight()) {
+				return SRESULT_DONE;
 			}
 			return SRESULT_WAIT;
 	}
@@ -286,4 +327,40 @@ stateResult_t rvWeaponShotgun::State_Reload ( const stateParms_t& parms ) {
 	}
 	return SRESULT_ERROR;	
 }
-			
+	
+/* krg25, adding a flashlight to the shotgun
+/*
+================
+rvWeaponBlaster::State_Flashlight
+================
+*/
+stateResult_t rvWeaponShotgun::State_Flashlight(const stateParms_t& parms) {
+	enum {
+		FLASHLIGHT_INIT,
+		FLASHLIGHT_WAIT,
+	};
+	switch (parms.stage) {
+	case FLASHLIGHT_INIT:
+		SetStatus(WP_FLASHLIGHT);
+		// Wait for the flashlight anim to play		
+		PlayAnim(ANIMCHANNEL_ALL, "reload_end", 0);
+		return SRESULT_STAGE(FLASHLIGHT_WAIT);
+
+	case FLASHLIGHT_WAIT:
+		if (!AnimDone(ANIMCHANNEL_ALL, 4)) {
+			return SRESULT_WAIT;
+		}
+
+		if (owner->IsFlashlightOn()) {
+			Flashlight(false);
+		}
+		else {
+			Flashlight(true);
+		}
+
+		SetState("Idle", 4);
+		return SRESULT_DONE;
+	}
+	return SRESULT_ERROR;
+}
+

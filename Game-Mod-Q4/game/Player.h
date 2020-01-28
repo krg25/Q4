@@ -510,7 +510,7 @@ public:
 
 	void					WeaponFireFeedback( const idDict *weaponDef );
 
- 	float					DefaultFov( void ) const;
+ 	float					DefaultFov( void ) const;  //default fov
  	float					CalcFov( bool honorZoom );
 	void					CalculateViewWeaponPos( idVec3 &origin, idMat3 &axis );
 	void					GetViewPos( idVec3 &origin, idMat3 &axis ) const;
@@ -887,7 +887,7 @@ private:
 
 	idInterpolate<float>	zoomFov;
 	idInterpolate<float>	centerView;
-	bool					fxFov;
+	bool					fxFov; //remember fxfov, i want to change fov. this is a bool
 
 	float					influenceFov;
 	int						influenceActive;		// level of influence.. 1 == no gun or hud .. 2 == 1 + no movement

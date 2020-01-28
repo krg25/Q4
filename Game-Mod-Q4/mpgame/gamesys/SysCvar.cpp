@@ -499,6 +499,8 @@ idCVar g_viewNodalX(				"g_viewNodalX",				"0",			CVAR_GAME | CVAR_FLOAT, "" );
 idCVar g_viewNodalZ(				"g_viewNodalZ",				"0",			CVAR_GAME | CVAR_FLOAT, "" );
 // RAVEN BEGIN
 // jshepard: fov as a float for smoother transitions?
+
+
 idCVar g_fov(						"g_fov",					"90",			CVAR_GAME | CVAR_FLOAT | PC_CVAR_ARCHIVE, "" );
 // RAVEN END
 idCVar g_skipViewEffects(			"g_skipViewEffects",		"0",			CVAR_GAME | CVAR_BOOL, "skip damage and other view effects" );

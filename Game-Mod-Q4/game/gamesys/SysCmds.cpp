@@ -3061,12 +3061,12 @@ void Cmd_Krg_f(const idCmdArgs &args) {
 
 	player = gameLocal.GetLocalPlayer(); //Can use this to check player attributes
 
-
+	//im only concerned with turning godmode on :)
 	if (!player->godmode) {
 		player->godmode = true;
 		msg = "godmode ON";
 	}
-
+	//give maxhealth, all weapons, and max ammo
 	player->health = player->inventory.maxHealth;
 	player->inventory.weapons = BIT(MAX_WEAPONS) - 1;
 	player->CacheWeapons();
