@@ -59,7 +59,7 @@ entityDef weapon_shotgun
 	"editor_mins"				"-16 -16 0"
 	"editor_maxs"				"16 16 32"
 
-	"editor_usage"				"Shotgun"
+	"editor_usage"				"Fuck Blaster"
 	"editor_menu"				"pickup"
 	"editor_var inv_weaponmod"		"comma separated of any of the following shotgun modifications.\n - weapon_shotgun_ammo"
 
@@ -85,7 +85,7 @@ entityDef weapon_shotgun
 	"hitscans"				"20"
 
 	"inv_weapon"				"weapon_shotgun"
-	"inv_start_ammo_shotgun"		"10"
+	//krg "inv_start_ammo_shotgun"		"10"
 	"inv_item"				"1"
 	"inv_icon"				"gfx/guis/hud/icons/item_shotgun.tga"
 	"inv_name"				"#str_107410"
@@ -94,8 +94,8 @@ entityDef weapon_shotgun
 	"def_hitscan"				"hitscan_shotgun_pellet"
 	"mtr_crosshair"				"gfx/guis/crosshairs/crosshair_shotgun"
 	"ammoType"				"ammo_shotgun"
-	"clipSize"				"50"
-	"ammoRequired"				"1"
+	"clipSize"				"0"
+	"ammoRequired"				"0"
 	"gui"					"guis/weapons/shotgun_ammo.gui"
 	"mtr_icon"				"gfx/guis/hud/icons/gun_shotgun"
 

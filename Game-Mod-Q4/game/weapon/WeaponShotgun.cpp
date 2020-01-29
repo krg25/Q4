@@ -82,7 +82,7 @@ rvWeaponShotgun::Spawn
 void rvWeaponShotgun::Spawn( void ) {
 	hitscans   = spawnArgs.GetFloat( "hitscans" );
 	
-	SetState( "Idle", 0 );	
+	SetState( "Idle", 4 );	
 	Flashlight(owner->IsFlashlightOn());
 }
 
@@ -343,7 +343,7 @@ stateResult_t rvWeaponShotgun::State_Flashlight(const stateParms_t& parms) {
 	case FLASHLIGHT_INIT:
 		SetStatus(WP_FLASHLIGHT);
 		// Wait for the flashlight anim to play		
-		PlayAnim(ANIMCHANNEL_ALL, "reload_end", 0);
+		PlayAnim(ANIMCHANNEL_ALL, "reload_end", 4);
 		return SRESULT_STAGE(FLASHLIGHT_WAIT);
 
 	case FLASHLIGHT_WAIT:

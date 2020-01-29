@@ -70,7 +70,7 @@ entityDef weapon_rocketlauncher
 	"joint_world_flash"			"muzzle_flash"
 
 	"inv_weapon"				"weapon_rocketlauncher"
-	"inv_start_ammo_rocketlauncher"	"10"
+	//"inv_start_ammo_rocketlauncher"	"10"
 	"inv_item"					"1"
 	"inv_icon"					"gfx/guis/hud/icons/item_rocket.tga"
 	"inv_name"					"#str_107409"	
@@ -85,8 +85,8 @@ entityDef weapon_rocketlauncher
 	"weaponname"				"Rocket Launcher"
 	"def_projectile"			"projectile_rocket"
 	"ammoType"					"ammo_rocketlauncher"
-	"clipSize"					"1"
-	"ammoRequired"				"1"
+	"clipSize"					"0"
+	"ammoRequired"				"0"
 	"gui"						"guis/weapons/rocketlauncher_ammo.gui"
 	"mtr_icon"					"gfx/guis/hud/icons/gun_rocketlauncher"
 
@@ -359,7 +359,7 @@ entityDef projectile_rocket
 	
 	"snd_fly"				"player_rocketlauncher_fly"
 
-	"friendly_impact"			"1"
+	"friendly_impact"			"1" //friendly impact = damage to self? krg: NO!
 	
 	"fx_teleport_enter"		"effects/mp/item_teleport.fx"
 	"fx_teleport"			"effects/mp/item_teleport.fx"
@@ -391,7 +391,7 @@ entityDef projectile_rocket_homing
 
 entityDef damage_rocketDirect 
 {
-	"damage"					"1"
+	"damage"					"300"
 	"push"						"45000"
 	"gib"						"1"
 
@@ -413,7 +413,7 @@ entityDef damage_rocketDirect_mp
 
 entityDef damage_rocketSplash 
 {
-	"damage"					"400"
+	"damage"					"200"
 	"radius"					"180"
 	"knockback"					"100000"
 	"push"						"100000"

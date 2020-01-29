@@ -1,7 +1,4 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (../Win32/Release\) contains files shared from another project (idLib.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  WeaponShotgun.cpp
-game\weapon\WeaponShotgun.cpp(1): warning C4627: '#include "../../idlib/precompiled.h"': skipped when looking for precompiled header use
-          Add directive to 'precompiled header (.h) file' or rebuild precompiled header
 C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (../Win32/Release\) contains files shared from another project (Game.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      Creating library ../Win32/Release\gamex86.lib and object ../Win32/Release\gamex86.exp
   game.vcxproj -> C:\Users\K\git\Q4\Game-Mod-Q4\../Win32/Release\gamex86.dll

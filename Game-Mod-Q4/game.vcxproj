@@ -72,7 +72,7 @@
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>../$(Platform)/$(Configuration)\</OutDir>
+    <OutDir>../playground</OutDir>
     <IntDir>$(OutDir)</IntDir>
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>false</LinkIncremental>
