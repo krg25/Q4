@@ -1,10 +1,2 @@
-﻿Build started 1/24/2020 10:27:10 PM.
-     1>Project "C:\Users\PC\test\q4\Game-Mod-Q4\idlib.vcxproj" on node 2 (Build target(s)).
-     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (../Win32/Debug\) contains files shared from another project (Game.vcxproj, MPGame.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-     1>Lib:
-         idlib.vcxproj -> C:\Users\PC\test\q4\Game-Mod-Q4\../Win32/Debug\idLib.lib
-     1>Done Building Project "C:\Users\PC\test\q4\Game-Mod-Q4\idlib.vcxproj" (Build target(s)).
-
-Build succeeded.
-
-Time Elapsed 00:00:00.59
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (../Win32/Debug\) contains files shared from another project (Game.vcxproj, MPGame.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  idlib.vcxproj -> C:\Users\K\git\Q4\Game-Mod-Q4\../Win32/Debug\idLib.lib

@@ -256,10 +256,11 @@ entityDef projectile_blaster
 	"maxs"						"2 2 2"
 	"cone"						"2"
 	"noshadows"					"1"
-																
+
+	
 	"def_damage"				"damage_blaster"
 								
-	"velocity"					"1500 0 0"
+	"velocity"					"3000 0 0"
 	"fuse"						"4"
 	"push"						"7500"
 								
@@ -292,7 +293,7 @@ entityDef projectile_blaster_charged
 	"mins"						"-8 -8 -8"
 	"maxs"						"8 8 8"
 
-	"velocity"					"2000 0 0"
+	"velocity"					"1500 0 0"
 
 	"fx_fly"					"effects/weapons/blaster/charged/fly.fx"
 	"fx_impact"					"effects/weapons/blaster/charged/impact_default.fx"
