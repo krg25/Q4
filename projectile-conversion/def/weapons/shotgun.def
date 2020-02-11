@@ -90,7 +90,8 @@ entityDef weapon_shotgun
 	"inv_name"				"#str_107410"
 
 	"weaponname"				"Shotgun"
-	"def_hitscan"				"hitscan_shotgun_pellet"
+	//"def_hitscan"				"hitscan_shotgun_pellet"
+	"def_projectile"            "projectile_shotgun_pellet"
 	"mtr_crosshair"				"gfx/guis/crosshairs/crosshair_shotgun"
 	"ammoType"				"ammo_shotgun"
 	"clipSize"				"8"
@@ -327,6 +328,47 @@ entityDef hitscan_shotgun_pellet
 	// for multiplayer clients. we only sync the hitscan def
 	// must be the same as weapon_shotgun_mp
 	"hitscans"				"11"
+}
+
+entityDef projectile_shotgun_pellet
+{
+	"spawnclass"				"idProjectile"
+	"mins"						"-2 -2 -2"
+	"maxs"						"2 2 2"
+	"cone"						"2"
+	"noshadows"					"1"
+
+								
+	"velocity"					"3000 0 0"
+	"fuse"						"4"
+	"push"						"7500"
+								
+	"detonate_on_fuse"			"1"
+	"detonate_on_death"			"0"
+	"detonate_on_world"			"1"
+	"detonate_on_actor"			"1"
+								
+	"impact_gib"				"1"
+								
+	"decal_bounce"				""
+	"decal_size"				"8"
+								
+	"fx_impact"				"effects/weapons/shotgun/impact_default.fx"	
+	"fx_impact_water"			"effects/ambient/splash_smll.fx"
+	"fx_impact_concrete"			"effects/weapons/shotgun/impact_concrete.fx"
+	"fx_impact_electronics"			"effects/weapons/shotgun/impact_electronics.fx"
+	"fx_impact_flesh"			"effects/weapons/shotgun/impact_flesh.fx"						
+	"fx_impact_glass"			"effects/weapons/shotgun/impact_glass.fx"
+	"fx_impact_bpglass"			"effects/weapons/shotgun/impact_bpglass.fx"
+	"fx_impact_monstermetal"		"effects/weapons/shotgun/impact_monstermetal.fx"
+	"fx_impact_mp"				"effects/weapons/shotgun/impact_default_mp.fx"
+	"fx_impact_concrete_mp"			"effects/weapons/shotgun/impact_default_mp.fx"
+	"fx_impact_rock_mp"			"effects/weapons/shotgun/impact_default_mp.fx"
+	"fx_impact_glass_mp"			"effects/weapons/shotgun/impact_default_mp.fx"
+	"fx_impact_bpglass_mp"			"effects/weapons/shotgun/impact_default_mp.fx"
+	"fx_impact_electronics_mp"		"effects/weapons/shotgun/impact_default_mp.fx"
+	"def_damage"				"damage_pellet"
+	"def_damage_flesh"			"damage_pellet"
 }
 
 //--------------------------------------------------------------------------------------------------------------------
