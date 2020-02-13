@@ -1130,8 +1130,8 @@ idPlayer::idPlayer() {
 // squirrel: added DeadZone multiplayer mode
 	allowedToRespawn		= true;
 // squirrel: Mode-agnostic buymenus
-	inBuyZone				= false;
-	inBuyZonePrev			= false;
+	inBuyZone				= true;
+	inBuyZonePrev			= true;
 // RITUAL END
 	spectating				= false;
 	spectator				= 0;
@@ -2788,7 +2788,7 @@ void idPlayer::SpawnToPoint( const idVec3 &spawn_origin, const idAngles &spawn_a
 
 // RITUAL BEGIN
 // squirrel: Mode-agnostic buymenus
-	if ( gameLocal.mpGame.IsBuyingAllowedInTheCurrentGameMode() ) {
+	if ( true ) { //gameLocal.mpGame.IsBuyingAllowedInTheCurrentGameMode()
 		// Record previous weapons for later restoration
 		inventory.carryOverWeapons &= ~CARRYOVER_WEAPONS_MASK;
 		inventory.carryOverWeapons |= inventory.weapons;
@@ -2911,8 +2911,8 @@ void idPlayer::SpawnToPoint( const idVec3 &spawn_origin, const idAngles &spawn_a
 	privateCameraView = NULL;
 
 // RITUAL BEGIN
-// squirrel: Mode-agnostic buymenus
-	if( gameLocal.isMultiplayer && gameLocal.mpGame.IsBuyingAllowedInTheCurrentGameMode() )
+// squirrel: Mode-agnostic buymenus KRG25
+	if( true ) //gameLocal.isMultiplayer && gameLocal.mpGame.IsBuyingAllowedInTheCurrentGameMode()
 	{
 		// restore previous weapons
 		inventory.weapons |= inventory.carryOverWeapons & CARRYOVER_WEAPONS_MASK;
@@ -2945,7 +2945,7 @@ void idPlayer::SpawnToPoint( const idVec3 &spawn_origin, const idAngles &spawn_a
 		}
 
 		// Reactivate team powerups
-		gameLocal.mpGame.SetUpdateForTeamPowerups(team);
+		//gameLocal.mpGame.SetUpdateForTeamPowerups(team);
 		UpdateTeamPowerups();
 	}
 // RITUAL END
@@ -4266,7 +4266,7 @@ bool idPlayer::GiveItem( idItem *item ) {
 		hud->HandleNamedEvent ( "itemPickup" );
 	}
 //RITUAL BEGIN
-	if ( gameLocal.mpGame.IsBuyingAllowedInTheCurrentGameMode() )
+	if ( true ) //gameLocal.mpGame.IsBuyingAllowedInTheCurrentGameMode()
 		gameLocal.mpGame.RedrawLocalBuyMenu();
 //RITUAL END
 
@@ -7916,9 +7916,11 @@ void idPlayer::UpdateGravity( void ) {
 idPlayer::ToggleObjectives
 ==============
 */
+//krg25 this actually shows whats in the objective menu
 void idPlayer::ToggleObjectives ( void ) {
 // RAVEN BEGIN
 // mekberg: allow disabling of objectives.
+	
 	if ( objectiveSystem == NULL || !objectivesEnabled ) {
 		return;
 	}
@@ -8407,7 +8409,7 @@ bool idPlayer::AttemptToBuyItem( const char* itemName )
 }
 
 bool idPlayer::CanBuy( void ) {
-	bool ret = gameLocal.mpGame.IsBuyingAllowedRightNow();
+	bool ret = true; //krg25 gameLocal.mpGame.IsBuyingAllowedRightNow();
 	if ( !ret ) {
 		return false;
 	}
@@ -8434,6 +8436,7 @@ void idPlayer::PerformImpulse( int impulse ) {
 
 //RAVEN BEGIN
 // nrausch: Don't send xenon dpad impulses over the network
+	//KRG25 this is where we handle impulses
 #ifdef _XENON
 	
 	if ( objectiveSystemOpen ) {
@@ -8476,6 +8479,8 @@ void idPlayer::PerformImpulse( int impulse ) {
 //RAVEN END
 
 	switch( impulse ) {
+		//krg25: it looks like raven had an IMPULSE_12 that would show a PDA? Is that a holdover from doom?  maybe I can use that for my perk menu
+		//still looking to use the buy menu because it has a system that exists, it has credit reward for kills and function to spend
 		case IMPULSE_13: {
 			Reload();
 			break;
@@ -8505,7 +8510,7 @@ void idPlayer::PerformImpulse( int impulse ) {
 			break;
 		}
 		case IMPULSE_19: {
-/*		
+/*	
 			// when we're not in single player, IMPULSE_19 is used for showScores
 			// otherwise it does IMPULSE_12 (PDA)
 			if ( !gameLocal.isMultiplayer ) {
@@ -8570,6 +8575,8 @@ void idPlayer::PerformImpulse( int impulse ) {
 
 // RITUAL BEGIN
 // squirrel: Mode-agnostic buymenus
+						 //krg25: the buy menu sends impulses here to buy items, where is PerformImpulse called? This can be used to buy perks.
+						 //just now thinking that powerups can be turned into perks, just give them unlimited time.
 		case IMPULSE_100:	AttemptToBuyItem( "weapon_shotgun" );				break;
 		case IMPULSE_101:	AttemptToBuyItem( "weapon_machinegun" );			break;
 		case IMPULSE_102:	AttemptToBuyItem( "weapon_hyperblaster" );			break;
@@ -8599,7 +8606,7 @@ void idPlayer::PerformImpulse( int impulse ) {
 		case IMPULSE_126:	break; // Unused
 		case IMPULSE_127:	break; // Unused
 // RITUAL END
-
+			//krg25 this is something I'm familliar with because of my flashlight mod
 		case IMPULSE_50: {
 			ToggleFlashlight ( );
 			break;
@@ -8672,6 +8679,8 @@ void idPlayer::HandleObjectiveInput() {
 		}
 	}
 #else
+	//krg25 RIGHT HERE is where the objective menu is handled when tab is pushed, this is how I'm going to convince the buy menu to show
+	//on the objective menu i want to show current xp and current gun xp
 	if ( ( usercmd.buttons & BUTTON_SCORES ) != 0 && !objectiveSystemOpen && !gameLocal.inCinematic ) {
 		ToggleObjectives ( );
 	} else if ( ( usercmd.buttons & BUTTON_SCORES ) == 0 && objectiveSystemOpen ) {
@@ -12475,8 +12484,12 @@ void idPlayer::ReadFromSnapshot( const idBitMsgDelta &msg ) {
 		}
 	}
 	if ( proto69 ) {
-		inBuyZone = false;
-		buyMenuCash = 0.0f;
+		inBuyZone = msg.ReadBits(1) != 0;
+		int cash = msg.ReadLong();
+		if (cash != (int)buyMenuCash) {
+			buyMenuCash = (float)cash;
+			gameLocal.mpGame.RedrawLocalBuyMenu();
+		}
 	} else {
 //RITUAL BEGIN
 		inBuyZone = msg.ReadBits( 1 ) != 0;

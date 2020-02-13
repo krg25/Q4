@@ -421,8 +421,12 @@ public:
 //RAVEN END
 
 // RITUAL BEGIN
-// squirrel: Mode-agnostic buymenus
+// squirrel: Mode-agnostic buymenus 
+
 	float					buyMenuCash;
+	//krg25: piggybacking off the buy menu code
+	float					playerExperience;
+	float					gunExperience;
 // RITUAL END
 
 public:

@@ -59,7 +59,7 @@ const int IMPULSE_15			= 15;			// weap prev
 const int IMPULSE_16			= 16;			// <unused>
 const int IMPULSE_17			= 17;			// ready to play ( toggles ui_ready )
 const int IMPULSE_18			= 18;			// center view
-const int IMPULSE_19			= 19;			// show PDA/INV/MAP
+const int IMPULSE_19			= 19;			// show PDA/INV/MAP KRG25, look, impulse 19 is important to us
 const int IMPULSE_20			= 20;			// toggle team ( toggles ui_team )
 const int IMPULSE_21			= 21;			// tourney toggle waiting room/spec
 const int IMPULSE_22			= 22;			// spectate
@@ -68,7 +68,7 @@ const int IMPULSE_24			= 24;			// <unused>
 const int IMPULSE_25			= 25;			// <unused>
 const int IMPULSE_26			= 26;			// <unused>
 const int IMPULSE_27			= 27;			// <unused>
-const int IMPULSE_28			= 28;			// vote yes
+const int IMPULSE_28			= 28;			// vote yes //krg these may come in handy
 const int IMPULSE_29			= 29;			// vote no
 const int IMPULSE_40			= 40;			// repeast last radio chatter
 
@@ -133,7 +133,7 @@ const int UCF_IMPULSE_SEQUENCE	= 0x0001;		// toggled every time an impulse comma
 class usercmd_t {
 public:
 	int			gameFrame;						// frame number
-	int			gameTime;						// game time
+	int			gameTime;						// game time krg25 game time? real game time? bullet time may be possible here
 	int			realTime;						// real game time
 	int			duplicateCount;					// duplication count for networking
 // RAVEN BEGIN

@@ -3484,7 +3484,7 @@ idGameLocal::RunFrame
 			currentThinkingEntity = NULL;
 		}
 	} else do {
-		// update the game time
+		// update the game time KRG25 look here
 		framenum++;
 		previousTime = time;
 		// bdube: use GetMSec access rather than USERCMD_TIME
