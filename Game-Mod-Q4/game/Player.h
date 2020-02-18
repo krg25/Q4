@@ -216,11 +216,20 @@ public:
 	int						startingAmmo[ MAX_WEAPONS ];
 
  	int						lastGiveTime;
- 	
+//KRG25 adding in PDA code from doom
+	int						pdasViewed[4]; // 128 bit flags for indicating if a pda has been viewed
+
+	int						selPDA;
+	int						selEMail;
+	int						selVideo;
+	int						selAudio;
+	bool					pdaOpened;
+	bool					turkeyScore;
 	idList<idDict *>		items;
 	idStrList				pdas;
 	idStrList				pdaSecurity;
 	idStrList				videos;
+	idStrList				emails;
 
 	idList<idLevelTriggerInfo> levelTriggers;
 
@@ -265,6 +274,7 @@ public:
 //	idList<rvDatabaseEntry>	database;
 	
 	int						secretAreasDiscovered;
+
 };
 
 class idPlayer : public idActor {
@@ -931,6 +941,9 @@ private:
 	// full screen guis track mouse movements directly
 	int						oldMouseX;
 	int						oldMouseY;
+	idStr					pdaAudio;
+	idStr					pdaVideo;
+	idStr					pdaVideoWave;
 
 	bool					tipUp;
 	bool					objectiveUp;
@@ -1114,6 +1127,12 @@ private:
 	//  mekberg: don't supress showing new objectives anymore
 	void					Event_AllowNewObjectives	( void );
 
+	//krg25 PDA events
+	void					Event_OpenPDA(void);
+	void					Event_PDAAvailable(void);
+	void					Event_InPDA(void);
+
+
 	// twhitaker: death shader
 	void					UpdateDeathShader			( bool state_hitch );
 	
@@ -1122,7 +1141,21 @@ private:
 	// RAVEN END
 
 	bool					IsLegsIdle						( bool crouching ) const;
-	
+	//krg25 adding in some PDA related stuff from doom
+	void					TogglePDA(void);
+	const idDeclPDA *		GetPDA(void) const;
+	const idDeclVideo *		GetVideo(int index);
+	void					Event_StopAudioLog(void);
+	void					StartAudioLog(void);
+	void					StopAudioLog(void);
+
+	void					UpdatePDAInfo(bool updatePDASel);
+	int						AddGuiPDAData(const declType_t dataType, const char *listName, const idDeclPDA *src, idUserInterface *gui);
+	void					ExtractEmailInfo(const idStr &email, const char *scan, idStr &out);
+	int						weapon_pda;
+	int						weapon_fists;
+
+
 	stateResult_t			State_Wait_Alive				( const stateParms_t& parms );
 	stateResult_t			State_Wait_ReloadAnim			( const stateParms_t& parms );
 	

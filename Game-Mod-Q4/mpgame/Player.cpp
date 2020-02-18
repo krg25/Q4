@@ -8455,18 +8455,14 @@ void idPlayer::PerformImpulse( int impulse ) {
 			break;
 		}
 		case IMPULSE_19: {
-/*		
-			// when we're not in single player, IMPULSE_19 is used for showScores
-			// otherwise it does IMPULSE_12 (PDA)
-			if ( !gameLocal.isMultiplayer ) {
-				if ( !objectiveSystemOpen ) {
-					if ( weapon ) {
-						weapon->Hide ();
-					}
-				}
-				ToggleMap();
-			}
-*/
+			if (!gameLocal.isMultiplayer) {
+			 if (objectiveSystemOpen) {
+				 TogglePDA();
+			 }
+			 else if (weapon_pda >= 0) {
+				 SelectWeapon(weapon_pda, true);
+			 }
+		 }
 			break;
 		}
 		case IMPULSE_20: {

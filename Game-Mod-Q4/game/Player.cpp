@@ -73,6 +73,8 @@ const int	POWERUP_BLINK_TIME	= 1000;			// Time between powerup wear off sounds
 const float MIN_BOB_SPEED		= 5.0f;			// minimum speed to bob and play run/walk animations at
 const int	MAX_RESPAWN_TIME	= 10000;
 const int	RAGDOLL_DEATH_TIME	= 3000;
+const int MAX_PDAS = 64; //krg25 PDA code
+const int MAX_PDA_ITEMS = 128; //krg25 pda code
 #ifdef _XENON
 	const int	RAGDOLL_DEATH_TIME_XEN_SP	= 1000;
 	const int	MAX_RESPAWN_TIME_XEN_SP	= 3000;
@@ -116,6 +118,12 @@ const idEventDef EV_Player_DisableObjectives( "disableObjectives" );
 
 // mekberg: don't suppress showing of new objectives anymore
 const idEventDef EV_Player_AllowNewObjectives( "<allownewobjectives>" );
+
+//krg25
+const idEventDef EV_Player_OpenPDA("openPDA");
+const idEventDef EV_Player_InPDA("inPDA", NULL, 'd');
+const idEventDef EV_Player_StopAudioLog("stopAudioLog");
+
 
 // RAVEN END
 
@@ -166,6 +174,12 @@ CLASS_DECLARATION( idActor, idPlayer )
 	EVENT( EV_Player_SetExtraProjPassEntity,idPlayer::Event_SetExtraProjPassEntity )
 //MCG: direct damage
 	EVENT( EV_Player_DamageEffect,			idPlayer::Event_DamageEffect )
+
+	//krg25
+	EVENT(EV_Player_OpenPDA, idPlayer::Event_OpenPDA)
+	EVENT(EV_Player_InPDA, idPlayer::Event_InPDA)
+	EVENT(EV_Player_StopAudioLog, idPlayer::Event_StopAudioLog)
+
 END_CLASS
 
 // RAVEN BEGIN
@@ -1230,6 +1244,9 @@ idPlayer::idPlayer() {
 	
 	oldMouseX				= 0;
 	oldMouseY				= 0;
+	pdaAudio = "";
+	pdaVideo = "";
+	pdaVideoWave = "";
 
 	lastDamageDef			= 0;
 	lastDamageDir			= vec3_zero;
@@ -8510,18 +8527,15 @@ void idPlayer::PerformImpulse( int impulse ) {
 			break;
 		}
 		case IMPULSE_19: {
-/*	
-			// when we're not in single player, IMPULSE_19 is used for showScores
-			// otherwise it does IMPULSE_12 (PDA)
-			if ( !gameLocal.isMultiplayer ) {
-				if ( !objectiveSystemOpen ) {
-					if ( weapon ) {
-						weapon->Hide ();
-					}
-				}
-				ToggleMap();
+							 gameLocal.Printf("Impulse 19 read");
+		 if (!gameLocal.isMultiplayer) {
+			 if (objectiveSystemOpen) {
+				TogglePDA();
+			 }
+			else if (weapon_pda >= 0) {
+				SelectWeapon(weapon_pda, true);
 			}
-*/
+		 }
 			break;
 		}
 		case IMPULSE_20: {
@@ -14088,6 +14102,383 @@ int idPlayer::CanSelectWeapon(const char* weaponName)
 	}
 
 	return weaponNum;
+}
+/* KRG25 taking the PDA code from doom3
+==============
+idPlayer::TogglePDA
+==============
+*/
+void idPlayer::TogglePDA(void) {
+	if (objectiveSystem == NULL) {
+		return;
+	}
+
+	if (inventory.pdas.Num() == 0) {
+		ShowTip(spawnArgs.GetString("text_infoTitle"), spawnArgs.GetString("text_noPDA"), true);
+		return;
+	}
+
+	assert(hud);
+
+	if (!objectiveSystemOpen) {
+		int j, c = inventory.items.Num();
+		objectiveSystem->SetStateInt("inv_count", c);
+		for (j = 0; j < MAX_INVENTORY_ITEMS; j++) {
+			objectiveSystem->SetStateString(va("inv_name_%i", j), "");
+			objectiveSystem->SetStateString(va("inv_icon_%i", j), "");
+			objectiveSystem->SetStateString(va("inv_text_%i", j), "");
+		}
+		for (j = 0; j < c; j++) {
+			idDict *item = inventory.items[j];
+			if (!item->GetBool("inv_pda")) {
+				const char *iname = item->GetString("inv_name");
+				const char *iicon = item->GetString("inv_icon");
+				const char *itext = item->GetString("inv_text");
+				objectiveSystem->SetStateString(va("inv_name_%i", j), iname);
+				objectiveSystem->SetStateString(va("inv_icon_%i", j), iicon);
+				objectiveSystem->SetStateString(va("inv_text_%i", j), itext);
+				const idKeyValue *kv = item->MatchPrefix("inv_id", NULL);
+				if (kv) {
+					objectiveSystem->SetStateString(va("inv_id_%i", j), kv->GetValue());
+				}
+			}
+		}
+
+		for (j = 0; j < MAX_WEAPONS; j++) {
+			const char *weapnum = va("def_weapon%d", j);
+			const char *hudWeap = va("weapon%d", j);
+			int weapstate = 0;
+			if (inventory.weapons & (1 << j)) {
+				const char *weap = spawnArgs.GetString(weapnum);
+				if (weap && *weap) {
+					weapstate++;
+				}
+			}
+			objectiveSystem->SetStateInt(hudWeap, weapstate);
+		}
+
+		objectiveSystem->SetStateInt("listPDA_sel_0", inventory.selPDA);
+		objectiveSystem->SetStateInt("listPDAVideo_sel_0", inventory.selVideo);
+		objectiveSystem->SetStateInt("listPDAAudio_sel_0", inventory.selAudio);
+		objectiveSystem->SetStateInt("listPDAEmail_sel_0", inventory.selEMail);
+		UpdatePDAInfo(false);
+		UpdateObjectiveInfo();
+		objectiveSystem->Activate(true, gameLocal.time);
+		hud->HandleNamedEvent("pdaPickupHide");
+		hud->HandleNamedEvent("videoPickupHide");
+	}
+	else {
+		inventory.selPDA = objectiveSystem->State().GetInt("listPDA_sel_0");
+		inventory.selVideo = objectiveSystem->State().GetInt("listPDAVideo_sel_0");
+		inventory.selAudio = objectiveSystem->State().GetInt("listPDAAudio_sel_0");
+		inventory.selEMail = objectiveSystem->State().GetInt("listPDAEmail_sel_0");
+		objectiveSystem->Activate(false, gameLocal.time);
+	}
+	objectiveSystemOpen ^= 1;
+}
+/*
+==============
+idPlayer::UpdatePDAInfo
+==============
+*/
+void idPlayer::UpdatePDAInfo(bool updatePDASel) {
+	int j, sel;
+
+	if (objectiveSystem == NULL) {
+		return;
+	}
+
+	assert(hud);
+
+	int currentPDA = objectiveSystem->State().GetInt("listPDA_sel_0", "0");
+	if (currentPDA == -1) {
+		currentPDA = 0;
+	}
+
+	if (updatePDASel) {
+		objectiveSystem->SetStateInt("listPDAVideo_sel_0", 0);
+		objectiveSystem->SetStateInt("listPDAEmail_sel_0", 0);
+		objectiveSystem->SetStateInt("listPDAAudio_sel_0", 0);
+	}
+
+	if (currentPDA > 0) {
+		currentPDA = inventory.pdas.Num() - currentPDA;
+	}
+
+	// Mark in the bit array that this pda has been read
+	if (currentPDA < 128) {
+		inventory.pdasViewed[currentPDA >> 5] |= 1 << (currentPDA & 31);
+	}
+
+	pdaAudio = "";
+	pdaVideo = "";
+	pdaVideoWave = "";
+	idStr name, data, preview, info, wave;
+	for (j = 0; j < MAX_PDAS; j++) {
+		objectiveSystem->SetStateString(va("listPDA_item_%i", j), "");
+	}
+	for (j = 0; j < MAX_PDA_ITEMS; j++) {
+		objectiveSystem->SetStateString(va("listPDAVideo_item_%i", j), "");
+		objectiveSystem->SetStateString(va("listPDAAudio_item_%i", j), "");
+		objectiveSystem->SetStateString(va("listPDAEmail_item_%i", j), "");
+		objectiveSystem->SetStateString(va("listPDASecurity_item_%i", j), "");
+	}
+	for (j = 0; j < inventory.pdas.Num(); j++) {
+
+		const idDeclPDA *pda = static_cast< const idDeclPDA* >(declManager->FindType(DECL_PDA, inventory.pdas[j], false));
+
+		if (pda == NULL) {
+			continue;
+		}
+
+		int index = inventory.pdas.Num() - j;
+		if (j == 0) {
+			// Special case for the first PDA
+			index = 0;
+		}
+
+		if (j != currentPDA && j < 128 && inventory.pdasViewed[j >> 5] & (1 << (j & 31))) {
+			// This pda has been read already, mark in gray
+			objectiveSystem->SetStateString(va("listPDA_item_%i", index), va(S_COLOR_GRAY "%s", pda->GetPdaName()));
+		}
+		else {
+			// This pda has not been read yet
+			objectiveSystem->SetStateString(va("listPDA_item_%i", index), pda->GetPdaName());
+		}
+
+		const char *security = pda->GetSecurity();
+		if (j == currentPDA || (currentPDA == 0 && security && *security)) {
+			if (*security == NULL) {
+				/* 
+				krg25 not sure what to do here, GetLanguageDict() 
+				does not exist and adding all of it from 
+				doom3 would be a lot of work and I'm not 
+				sure if I even have the right functions for it
+				security = common->GetLanguageDict()->GetString("#str_00066");
+				*/
+			}
+			objectiveSystem->SetStateString("PDASecurityClearance", security);
+		}
+
+		if (j == currentPDA) {
+
+			objectiveSystem->SetStateString("pda_icon", pda->GetIcon());
+			objectiveSystem->SetStateString("pda_id", pda->GetID());
+			objectiveSystem->SetStateString("pda_title", pda->GetTitle());
+
+			if (j == 0) {
+				// Selected, personal pda
+				// Add videos
+				if (updatePDASel || !inventory.pdaOpened) {
+					objectiveSystem->HandleNamedEvent("playerPDAActive");
+					objectiveSystem->SetStateString("pda_personal", "1");
+					inventory.pdaOpened = true;
+				}
+				objectiveSystem->SetStateString("pda_location", hud->State().GetString("location"));
+				objectiveSystem->SetStateString("pda_name", cvarSystem->GetCVarString("ui_name"));
+				AddGuiPDAData(DECL_VIDEO, "listPDAVideo", pda, objectiveSystem);
+				sel = objectiveSystem->State().GetInt("listPDAVideo_sel_0", "0");
+				const idDeclVideo *vid = NULL;
+				if (sel >= 0 && sel < inventory.videos.Num()) {
+					vid = static_cast< const idDeclVideo * >(declManager->FindType(DECL_VIDEO, inventory.videos[sel], false));
+				}
+				if (vid) {
+					pdaVideo = vid->GetRoq();
+					pdaVideoWave = vid->GetWave();
+					objectiveSystem->SetStateString("PDAVideoTitle", vid->GetVideoName());
+					objectiveSystem->SetStateString("PDAVideoVid", vid->GetRoq());
+					objectiveSystem->SetStateString("PDAVideoIcon", vid->GetPreview());
+					objectiveSystem->SetStateString("PDAVideoInfo", vid->GetInfo());
+				}
+				else {
+					//FIXME: need to precache these in the player def
+					objectiveSystem->SetStateString("PDAVideoVid", "sound/vo/video/welcome.tga");
+					objectiveSystem->SetStateString("PDAVideoIcon", "sound/vo/video/welcome.tga");
+					objectiveSystem->SetStateString("PDAVideoTitle", "");
+					objectiveSystem->SetStateString("PDAVideoInfo", "");
+				}
+			}
+			else {
+				// Selected, non-personal pda
+				// Add audio logs
+				if (updatePDASel) {
+					objectiveSystem->HandleNamedEvent("playerPDANotActive");
+					objectiveSystem->SetStateString("pda_personal", "0");
+					inventory.pdaOpened = true;
+				}
+				objectiveSystem->SetStateString("pda_location", pda->GetPost());
+				objectiveSystem->SetStateString("pda_name", pda->GetFullName());
+				int audioCount = AddGuiPDAData(DECL_AUDIO, "listPDAAudio", pda, objectiveSystem);
+				objectiveSystem->SetStateInt("audioLogCount", audioCount);
+				sel = objectiveSystem->State().GetInt("listPDAAudio_sel_0", "0");
+				const idDeclAudio *aud = NULL;
+				if (sel >= 0) {
+					aud = pda->GetAudioByIndex(sel);
+				}
+				if (aud) {
+					pdaAudio = aud->GetWave();
+					objectiveSystem->SetStateString("PDAAudioTitle", aud->GetAudioName());
+					objectiveSystem->SetStateString("PDAAudioIcon", aud->GetPreview());
+					objectiveSystem->SetStateString("PDAAudioInfo", aud->GetInfo());
+				}
+				else {
+					objectiveSystem->SetStateString("PDAAudioIcon", "sound/vo/video/welcome.tga");
+					objectiveSystem->SetStateString("PDAAutioTitle", "");
+					objectiveSystem->SetStateString("PDAAudioInfo", "");
+				}
+			}
+			// add emails
+			name = "";
+			data = "";
+			int numEmails = pda->GetNumEmails();
+			if (numEmails > 0) {
+				AddGuiPDAData(DECL_EMAIL, "listPDAEmail", pda, objectiveSystem);
+				sel = objectiveSystem->State().GetInt("listPDAEmail_sel_0", "-1");
+				if (sel >= 0 && sel < numEmails) {
+					const idDeclEmail *email = pda->GetEmailByIndex(sel);
+					name = email->GetSubject();
+					data = email->GetBody();
+				}
+			}
+			objectiveSystem->SetStateString("PDAEmailTitle", name);
+			objectiveSystem->SetStateString("PDAEmailText", data);
+		}
+	}
+	if (objectiveSystem->State().GetInt("listPDA_sel_0", "-1") == -1) {
+		objectiveSystem->SetStateInt("listPDA_sel_0", 0);
+	}
+	objectiveSystem->StateChanged(gameLocal.time);
+}
+/*
+==============
+idPlayer::AddGuiPDAData
+==============
+*/
+int idPlayer::AddGuiPDAData(const declType_t dataType, const char *listName, const idDeclPDA *src, idUserInterface *gui) {
+	int c, i;
+	idStr work;
+	if (dataType == DECL_EMAIL) {
+		c = src->GetNumEmails();
+		for (i = 0; i < c; i++) {
+			const idDeclEmail *email = src->GetEmailByIndex(i);
+			if (email == NULL) {
+				work = va("-\tEmail %d not found\t-", i);
+			}
+			else {
+				work = email->GetFrom();
+				work += "\t";
+				work += email->GetSubject();
+				work += "\t";
+				work += email->GetDate();
+			}
+			gui->SetStateString(va("%s_item_%i", listName, i), work);
+		}
+		return c;
+	}
+	else if (dataType == DECL_AUDIO) {
+		c = src->GetNumAudios();
+		for (i = 0; i < c; i++) {
+			const idDeclAudio *audio = src->GetAudioByIndex(i);
+			if (audio == NULL) {
+				work = va("Audio Log %d not found", i);
+			}
+			else {
+				work = audio->GetAudioName();
+			}
+			gui->SetStateString(va("%s_item_%i", listName, i), work);
+		}
+		return c;
+	}
+	else if (dataType == DECL_VIDEO) {
+		c = inventory.videos.Num();
+		for (i = 0; i < c; i++) {
+			const idDeclVideo *video = GetVideo(i);
+			if (video == NULL) {
+				work = va("Video CD %s not found", inventory.videos[i].c_str());
+			}
+			else {
+				work = video->GetVideoName();
+			}
+			gui->SetStateString(va("%s_item_%i", listName, i), work);
+		}
+		return c;
+	}
+	return 0;
+}
+
+/*
+==============
+idPlayer::GetPDA
+==============
+*/
+const idDeclPDA *idPlayer::GetPDA(void) const {
+	if (inventory.pdas.Num()) {
+		return static_cast< const idDeclPDA* >(declManager->FindType(DECL_PDA, inventory.pdas[0]));
+	}
+	else {
+		return NULL;
+	}
+}
+
+
+/*
+==============
+idPlayer::GetVideo
+==============
+*/
+const idDeclVideo *idPlayer::GetVideo(int index) {
+	if (index >= 0 && index < inventory.videos.Num()) {
+		return static_cast< const idDeclVideo* >(declManager->FindType(DECL_VIDEO, inventory.videos[index], false));
+	}
+	return NULL;
+}
+/*
+==================
+idPlayer::Event_OpenPDA
+==================
+*/
+void idPlayer::Event_OpenPDA(void) {
+	if (!gameLocal.isMultiplayer) {
+		TogglePDA();
+	}
+}
+
+/*
+==================
+idPlayer::Event_InPDA
+==================
+*/
+void idPlayer::Event_InPDA(void) {
+	idThread::ReturnInt(objectiveSystemOpen);
+}
+/*
+===============
+idPlayer::Event_StopAudioLog
+===============
+*/
+void idPlayer::Event_StopAudioLog(void) {
+	StopAudioLog();
+}
+/*
+===============
+idPlayer::StartAudioLog
+===============
+*/
+void idPlayer::StartAudioLog(void) {
+	if (hud) {
+		hud->HandleNamedEvent("audioLogUp");
+	}
+}
+
+/*
+===============
+idPlayer::StopAudioLog
+===============
+*/
+void idPlayer::StopAudioLog(void) {
+	if (hud) {
+		hud->HandleNamedEvent("audioLogDown");
+	}
 }
 
 // RITUAL END
