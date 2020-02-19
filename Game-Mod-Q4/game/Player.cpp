@@ -1123,6 +1123,13 @@ idPlayer::idPlayer() {
 	objectiveSystem			= NULL;
 	objectiveSystemOpen		= false;
 	showNewObjectives		= false;
+	//krg25 weapon PDA shit
+	weapon_pda = -1;
+	weapon_fists = -1;
+
+
+
+
 #ifdef _XENON
 	g_ObjectiveSystemOpen	= false;
 #endif
@@ -1522,12 +1529,15 @@ void idPlayer::Init( void ) {
 
 	oldButtons				= 0;
 	oldFlags				= 0;
-
+	//krg25 adding pda....
 	currentWeapon			= -1;
 	idealWeapon				= -1;
 	previousWeapon			= -1;
 	weaponSwitchTime		= 0;
 	weaponEnabled			= true;
+	//soulcube? weapon_soulcube = SlotForWeapon("weapon_soulcube"); 
+	weapon_pda = SlotForWeapon("weapon_pda");
+	weapon_fists = SlotForWeapon("weapon_fists");
  	showWeaponViewModel		= GetUserInfo()->GetBool( "ui_showGun" );
 	oldInventoryWeapons		= 0;
 
@@ -1898,7 +1908,11 @@ void idPlayer::Spawn( void ) {
 		}
 
 		if ( !gameLocal.isMultiplayer ) {
+			/*
 			objectiveSystem = uiManager->FindGui( spawnArgs.GetString( "wristcomm", "guis/wristcomm.gui" ), true, false, true );
+			objectiveSystemOpen = false;
+			*/
+			objectiveSystem = uiManager->FindGui("guis/pda.gui", true, false, true);
 			objectiveSystemOpen = false;
 #ifdef _XENON
 			g_ObjectiveSystemOpen = objectiveSystemOpen;
@@ -2141,6 +2155,10 @@ void idPlayer::Save( idSaveGame *savefile ) const {
 	savefile->WriteUserInterface( cinematicHud, false );
 	savefile->WriteBool( objectiveSystemOpen );
 	savefile->WriteBool( disableHud );
+	//KRG25 save PDA shit
+	//savefile->WriteInt(weapon_soulcube);
+	savefile->WriteInt(weapon_pda);
+	savefile->WriteInt(weapon_fists);
 
 	savefile->WriteInt( lastDmgTime );
 	savefile->WriteInt( deathClearContentsTime );
@@ -2407,6 +2425,10 @@ void idPlayer::Restore( idRestoreGame *savefile ) {
 	savefile->ReadUserInterface( objectiveSystem, &spawnArgs );
 	savefile->ReadUserInterface( cinematicHud, &spawnArgs );
 	savefile->ReadBool( objectiveSystemOpen );
+	//krg25 you already know
+	//savefile->ReadInt(weapon_soulcube);
+	savefile->ReadInt(weapon_pda);
+	savefile->ReadInt(weapon_fists);
 
 #ifdef _XENON
 	g_ObjectiveSystemOpen = objectiveSystemOpen;
@@ -5749,7 +5771,17 @@ void idPlayer::SelectWeapon( int num, bool force ) {
  	if ( gameLocal.isClient ) {
  		return;
  	}
-
+	//KRG25 adding dooms code to default to fists if no weapons
+	if ((num != weapon_pda) && gameLocal.world->spawnArgs.GetBool("no_Weapons")) {
+		num = weapon_fists;
+		hiddenWeapon ^= 1;
+		if (hiddenWeapon && weapon) {
+			weapon->LowerWeapon();
+		}
+		else {
+			weapon->RaiseWeapon();
+		}
+	}
  	weap = spawnArgs.GetString( va( "def_weapon%d", num ) );
 	if ( !weap[ 0 ] ) {
 		gameLocal.Warning( "Invalid weapon def_weapon%d\n", num );
@@ -5794,11 +5826,10 @@ void idPlayer::SelectWeapon( int num, bool force ) {
  				return;
  			}
 			idealWeapon = previousWeapon;
-/* NO PDA yet
 		} else if ( ( weapon_pda >= 0 ) && ( num == weapon_pda ) && ( inventory.pdas.Num() == 0 ) ) {
 			ShowTip( spawnArgs.GetString( "text_infoTitle" ), spawnArgs.GetString( "text_noPDA" ), true );
 			return;
-*/
+
 		} else {
 			idealWeapon = num;
 		}
@@ -6100,7 +6131,9 @@ void idPlayer::Weapon_Combat( void ) {
  			if ( weapon->IsHolstered() && weaponViewModel ) {
 				assert( idealWeapon >= 0 );
 				assert( idealWeapon < MAX_WEAPONS );
-
+				if (currentWeapon != weapon_pda && !spawnArgs.GetBool(va("weapon%d_toggle", currentWeapon))) {
+					previousWeapon = currentWeapon;
+				}
 				SetWeapon( idealWeapon );
 
 				weapon->Raise();
@@ -7928,63 +7961,7 @@ void idPlayer::UpdateGravity( void ) {
 }
 // RAVEN END
 
-/*
-==============
-idPlayer::ToggleObjectives
-==============
-*/
-//krg25 this actually shows whats in the objective menu
-void idPlayer::ToggleObjectives ( void ) {
-// RAVEN BEGIN
-// mekberg: allow disabling of objectives.
-	
-	if ( objectiveSystem == NULL || !objectivesEnabled ) {
-		return;
-	}
-// RAVEN END
 
-	if ( !objectiveSystemOpen ) {
-		int j, c = inventory.items.Num();
-		objectiveSystem->SetStateInt( "inv_count", c );
-		for ( j = 0; j < c; j++ ) {
-			idDict *item = inventory.items[j];
-			if ( !item->GetBool( "inv_pda" ) ) {
-				const char *iname = item->GetString( "inv_name" );
-				iname = common->GetLocalizedString( iname );
-
-				const char *iicon = item->GetString( "inv_icon" );
-				const char *itext = item->GetString( "inv_text" );
-				objectiveSystem->SetStateString( va( "inv_name_%i", j ), iname );
-				objectiveSystem->SetStateString( va( "inv_icon_%i", j ), iicon );
-				objectiveSystem->SetStateString( va( "inv_text_%i", j ), itext );
-				const idKeyValue *kv = item->MatchPrefix( "inv_id", NULL );
-				if ( kv ) {
-					objectiveSystem->SetStateString( va( "inv_id_%i", j ), kv->GetValue() );
-				}
-			}
-		}
-
-		for ( j = 0; j < MAX_WEAPONS; j++ ) {
-			const char *weapnum = va( "def_weapon%d", j );
-			int weapstate = 0;
-			if ( inventory.weapons & ( 1 << j ) ) {
-				const char *weap = spawnArgs.GetString( weapnum );
-				if ( weap && *weap ) {
-					weapstate++;
-				}
-			}
-			objectiveSystem->SetStateInt( weapnum, weapstate );
-		}
-
-		UpdateObjectiveInfo();
-		objectiveSystem->Activate( true, gameLocal.time );
-		objectiveSystem->HandleNamedEvent( "wristcommShow" );
-	} else {
-		objectiveSystem->Activate( false, gameLocal.time );
-		objectiveSystem->HandleNamedEvent( "wristcommHide" );
-	}
-	objectiveSystemOpen ^= 1;
-}
 
 /*
 ==============
@@ -14348,6 +14325,64 @@ void idPlayer::UpdatePDAInfo(bool updatePDASel) {
 		objectiveSystem->SetStateInt("listPDA_sel_0", 0);
 	}
 	objectiveSystem->StateChanged(gameLocal.time);
+}
+/*
+==============
+idPlayer::ToggleObjectives
+==============
+*/
+//krg25 this actually shows whats in the objective menu
+void idPlayer::ToggleObjectives(void) {
+	// RAVEN BEGIN
+	// mekberg: allow disabling of objectives.
+
+	if (objectiveSystem == NULL || !objectivesEnabled) {
+		return;
+	}
+	// RAVEN END
+
+	if (!objectiveSystemOpen) {
+		int j, c = inventory.items.Num();
+		objectiveSystem->SetStateInt("inv_count", c);
+		for (j = 0; j < c; j++) {
+			idDict *item = inventory.items[j];
+			if (!item->GetBool("inv_pda")) {
+				const char *iname = item->GetString("inv_name");
+				iname = common->GetLocalizedString(iname);
+
+				const char *iicon = item->GetString("inv_icon");
+				const char *itext = item->GetString("inv_text");
+				objectiveSystem->SetStateString(va("inv_name_%i", j), iname);
+				objectiveSystem->SetStateString(va("inv_icon_%i", j), iicon);
+				objectiveSystem->SetStateString(va("inv_text_%i", j), itext);
+				const idKeyValue *kv = item->MatchPrefix("inv_id", NULL);
+				if (kv) {
+					objectiveSystem->SetStateString(va("inv_id_%i", j), kv->GetValue());
+				}
+			}
+		}
+
+		for (j = 0; j < MAX_WEAPONS; j++) {
+			const char *weapnum = va("def_weapon%d", j);
+			int weapstate = 0;
+			if (inventory.weapons & (1 << j)) {
+				const char *weap = spawnArgs.GetString(weapnum);
+				if (weap && *weap) {
+					weapstate++;
+				}
+			}
+			objectiveSystem->SetStateInt(weapnum, weapstate);
+		}
+
+		UpdateObjectiveInfo();
+		objectiveSystem->Activate(true, gameLocal.time);
+		objectiveSystem->HandleNamedEvent("wristcommShow");
+	}
+	else {
+		objectiveSystem->Activate(false, gameLocal.time);
+		objectiveSystem->HandleNamedEvent("wristcommHide");
+	}
+	objectiveSystemOpen ^= 1;
 }
 /*
 ==============
