@@ -786,6 +786,8 @@ public:
 	void					SetSuspendTime( const float minTime, const float maxTime );
 							// set the time scale value
 	void					SetTimeScale( const float ts ) { timeScale = ts; }
+							//get the time scale value krg25
+	float					GetTimeScale(void) { return timeScale; }
 							// set time scale ramp
 	void					SetTimeScaleRamp( const float start, const float end );
 							// set the joint friction scale
@@ -909,7 +911,7 @@ private:
 	float					linearFriction;					// default translational friction
 	float					angularFriction;				// default rotational friction
 	float					contactFriction;				// default friction with contact surfaces
-	float					bouncyness;						// default bouncyness
+	float					bouncyness;// default bouncyness
 	float					totalMass;						// total mass of articulated figure
 	float					forceTotalMass;					// force this total mass
 

@@ -15,7 +15,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>Game</ProjectName>
+    <ProjectName>game</ProjectName>
     <ProjectGuid>{49BEC5C6-B964-417A-851E-808886B57430}</ProjectGuid>
     <RootNamespace>Game</RootNamespace>
     <SccProjectName>Perforce Project</SccProjectName>

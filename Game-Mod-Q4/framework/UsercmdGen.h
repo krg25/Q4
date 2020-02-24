@@ -123,7 +123,7 @@ const int IMPULSE_125			= 125;			// Buy team powerup: damage_boost
 const int IMPULSE_126			= 126;			// UNUSED
 const int IMPULSE_127			= 127;			// UNUSED
 // RITUAL END
-
+const int IMPULSE_901 = 901;			// KRG25 for bullettime
 
 const int KEY_MOVESPEED			= 127;
 

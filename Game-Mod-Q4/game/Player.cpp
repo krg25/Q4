@@ -8475,7 +8475,7 @@ void idPlayer::PerformImpulse( int impulse ) {
 		ClientSendEvent( EVENT_IMPULSE, &msg );
 	}
 
-	if ( impulse >= IMPULSE_0 && impulse <= IMPULSE_12 ) {
+	if ( impulse >= IMPULSE_0 && impulse < IMPULSE_12 ) { //changed from <= IMPULSE_12
 		SelectWeapon( impulse, false );
 		return;
 	}
@@ -8498,6 +8498,13 @@ void idPlayer::PerformImpulse( int impulse ) {
 	switch( impulse ) {
 		//krg25: it looks like raven had an IMPULSE_12 that would show a PDA? Is that a holdover from doom?  maybe I can use that for my perk menu
 		//still looking to use the buy menu because it has a system that exists, it has credit reward for kills and function to spend
+		case IMPULSE_12: {
+
+			
+			break;
+		}
+	
+	
 		case IMPULSE_13: {
 			Reload();
 			break;
@@ -8627,7 +8634,7 @@ void idPlayer::PerformImpulse( int impulse ) {
 		}
 
  		case IMPULSE_51: {
- 			LastWeapon();
+		    SlowTime( );
  			break;
  		}
 	} 
@@ -8654,7 +8661,23 @@ void idPlayer::PerformImpulse( int impulse ) {
 #endif
 //RAVEN END
 }
-   
+/*Krg25
+==============
+idPlayer::SlowTime
+==============
+*/
+
+void idPlayer::SlowTime(void){
+	int start = gameLocal.time;
+	while (gameLocal.time < (start + 20000)){ //20 second timer
+		//krgphysics->SetTimeScale(0.5f);
+		gameLocal.Printf("Impulse 51 " + gameLocal.time); //+ krgphysics->GetTimeScale());
+	}
+	//krgphysics->SetTimeScale(1.0f);
+	//set on a time for now, but we will work out "stamina"
+	return;
+}
+
 /*
 ==============
 idPlayer::HandleESC
@@ -8755,7 +8778,7 @@ void idPlayer::EvaluateControls( void ) {
 
 /*
 ==============
-idPlayer::AdjustSpeed
+idPlayer::AdjustSpeed KRG25 look here
 ==============
 */
 void idPlayer::AdjustSpeed( void ) {

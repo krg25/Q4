@@ -1154,6 +1154,9 @@ private:
 	void					ExtractEmailInfo(const idStr &email, const char *scan, idStr &out);
 	int						weapon_pda;
 	int						weapon_fists;
+	//krg25
+	idPhysics_AF *			krgphysics;
+	void					SlowTime(void);
 
 
 	stateResult_t			State_Wait_Alive				( const stateParms_t& parms );
