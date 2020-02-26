@@ -1155,8 +1155,9 @@ private:
 	int						weapon_pda;
 	int						weapon_fists;
 	//krg25
-	idPhysics_AF *			krgphysics;
+	//idPhysics_AF *			c(void) { return af.GetPhysics(); } unneeded
 	void					SlowTime(void);
+	bool					tslowed;
 
 
 	stateResult_t			State_Wait_Alive				( const stateParms_t& parms );

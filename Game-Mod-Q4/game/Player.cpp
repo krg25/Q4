@@ -1094,6 +1094,8 @@ idPlayer::idPlayer() {
 	memset( &usercmd, 0, sizeof( usercmd ) );
 
 	alreadyDidTeamAnnouncerSound = false;
+	//krg25
+	tslowed = false;
 
 	doInitWeapon			= false;
 	noclip					= false;
@@ -1514,6 +1516,8 @@ idPlayer::Init
 */
 void idPlayer::Init( void ) {
 	const char			*value;
+	
+	tslowed = false;
 	
 	noclip					= false;
 	godmode					= false;
@@ -8634,7 +8638,8 @@ void idPlayer::PerformImpulse( int impulse ) {
 		}
 
  		case IMPULSE_51: {
-		    SlowTime( );
+							 tslowed = true;
+		    //SlowTime( );
  			break;
  		}
 	} 
@@ -8666,10 +8671,10 @@ void idPlayer::PerformImpulse( int impulse ) {
 idPlayer::SlowTime
 ==============
 */
-
+/* I'm not smart enough to attempt this. I'll do it the hack way
 void idPlayer::SlowTime(void){
 	int start = gameLocal.time;
-	while (gameLocal.time < (start + 20000)){ //20 second timer
+	while (gameLocal.time < (start + 20000)){ //20 second time
 		//krgphysics->SetTimeScale(0.5f);
 		gameLocal.Printf("Impulse 51 " + gameLocal.time); //+ krgphysics->GetTimeScale());
 	}
@@ -8677,7 +8682,7 @@ void idPlayer::SlowTime(void){
 	//set on a time for now, but we will work out "stamina"
 	return;
 }
-
+*/ 
 /*
 ==============
 idPlayer::HandleESC
@@ -9689,6 +9694,32 @@ void idPlayer::Think( void ) {
 		inBuyZone = false;
 
 	inBuyZonePrev = false;
+
+	//krg25 this definitely gets called I don't think this is the right place to do this...
+	if (tslowed){
+			//int start = gameLocal.time;
+			//while (gameLocal.time < (start + 20000)){ //20 second timer
+				//idPhysics_AF * phys = krgphysics();
+		float timescaleee = cvarSystem->GetCVarFloat("af_timeScale");
+		if (timescaleee == 1.0f){
+			gameLocal.Printf("Am I fucking retarded or NOT? %f", timescaleee);
+			cvarSystem->SetCVarFloat("af_timeScale", 0.2f);
+			float timescaleee = cvarSystem->GetCVarFloat("af_timeScale");
+			gameLocal.Printf("WELL!?!?!?! %f", timescaleee);
+		}
+				//gameLocal.Printf("Impulse 51"); //+ krgphysics->GetTimeScale());
+			//krgphysics->SetTimeScale(1.0f);
+			//set on a time for now, but we will work out "stamina"
+
+		//timescale = 0.5
+		//timer that unsets tslowed when finished
+	}
+	else{
+		//timescale = 1
+
+	}
+
+
 }
 
 /*
