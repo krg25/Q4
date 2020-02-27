@@ -1,9 +1,9 @@
-﻿Build started 2/25/2020 11:19:23 AM.
+﻿Build started 2/27/2020 11:04:50 AM.
      1>Project "C:\Users\PC\test\q4\Game-Mod-Q4\game.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (../projectile-conversion/) contains files shared from another project (idLib.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W4 /WX- /Od /Oy- /D _DEBUG /D _WINDOWS /D GAME_DLL /D Q4SDK /D _WINDLL /D _MBCS /Gm- /EHsc /RTC1 /MTd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /GR /Yu /Fp"../projectile-conversion/game/game.pch" /Fo"../projectile-conversion/game/" /Fd"../projectile-conversion/gamex86.pdb" /Gd /TP /analyze- /errorReport:prompt game\Player.cpp
-         Player.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W4 /WX- /Od /Oy- /D _DEBUG /D _WINDOWS /D GAME_DLL /D Q4SDK /D _WINDLL /D _MBCS /Gm- /EHsc /RTC1 /MTd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /GR /Yu /Fp"../projectile-conversion/game/game.pch" /Fo"../projectile-conversion/game/" /Fd"../projectile-conversion/gamex86.pdb" /Gd /TP /analyze- /errorReport:prompt game\PlayerView.cpp
+         PlayerView.cpp
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(1186,5): warning MSB8012: TargetPath(C:\Users\PC\test\q4\Game-Mod-Q4\../projectile-conversion/game.dll) does not match the Linker's OutputFile property value (C:\Users\PC\test\q4\projectile-conversion\gamex86.dll). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(1188,5): warning MSB8012: TargetName(game) does not match the Linker's OutputFile property value (gamex86). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
        Link:
@@ -174,4 +174,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.64
+Time Elapsed 00:00:03.70

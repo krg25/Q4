@@ -869,6 +869,8 @@ void idGameLocal::SaveGame( idFile *f, saveType_t saveType ) {
 	savegame.WriteInt( random.GetSeed() );
 	savegame.WriteObject( frameCommandThread );
 
+	savegame.WriteInt(STStart);
+
 	// clip
 	// push
 	// pvs
@@ -2179,6 +2181,8 @@ bool idGameLocal::InitFromSaveGame( const char *mapName, idRenderWorld *renderWo
 // RAVEN END
 
 	savegame.ReadInt( localClientNum );
+
+	savegame.ReadInt(STStart); //krg25
 
 	// snapshotEntities is used for multiplayer only
 
@@ -3522,16 +3526,18 @@ TIME_THIS_SCOPE("idGameLocal::RunFrame - gameDebug.BeginFrame()");
 		}
 		
 		if (player->IsSlowed()) {
+			/*
 			gameLocal.Printf("Time: %i", time);
 			gameLocal.Printf(" Start Time: %i", STStart);
 			gameLocal.Printf("\n");
-			
+			*/
 			if (timescale.GetFloat() == 1.0f) {
 				SetSTStart(time);
 				gameLocal.Printf("Timescale set from %f", timescale.GetFloat());
 				timescale.SetFloat(0.5f);
 				gameLocal.Printf(" to %f", timescale.GetFloat());
 				gameLocal.Printf(" at %i", GetSTStart());
+				
 			}
 
 			if (time >= GetSTStart() + 5000) {

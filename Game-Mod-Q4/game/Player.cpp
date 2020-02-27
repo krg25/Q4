@@ -2111,7 +2111,7 @@ void idPlayer::Save( idSaveGame *savefile ) const {
 	savefile->WriteUsercmd( usercmd );
 
 	playerView.Save( savefile );
-
+	savefile->WriteBool(tslowed);
 	savefile->WriteBool( noclip );
 	savefile->WriteBool( godmode );
 	savefile->WriteInt ( godmodeDamage );	
@@ -2373,7 +2373,7 @@ void idPlayer::Restore( idRestoreGame *savefile ) {
 	savefile->ReadUsercmd( usercmd );
 
 	playerView.Restore( savefile );
-
+	savefile->ReadBool(tslowed);
 	savefile->ReadBool( noclip );
 	savefile->ReadBool( godmode );
 	savefile->ReadInt ( godmodeDamage );	
@@ -9689,36 +9689,31 @@ void idPlayer::Think( void ) {
 		inBuyZone = false;
 
 	inBuyZonePrev = false;
-	/*
+
 	if (tslowed) {
-		
-		if (timescale.GetFloat() == 1.0f) {
-			SlowTime();
+
+		playerView.Flash(idVec4(0.0f, 0.0f, 0.8f, 0.3f), 10);
+	}
+	else{
+		playerView.ClearEffects();
+	}
+		/*Chief called, that ain 't it.
+		if (powerUpOverlay = NULL){
+			powerUpOverlay = quadOverlay;
+			PlayEffect("fx_quaddamage", animator.GetJointHandle("chest"), true);
+			StartSound("snd_quaddamage_idle", SND_CHANNEL_POWERUP_IDLE, 0, false, NULL);
 		}
-		else {
-			if (gameLocal.time = STStart + 5000) {
-				tslowed = false;
-			}
+	}
+	else{
+		if (powerUpOverlay != NULL){
+			powerUpOverlay = NULL;
+			StopEffect("fx_quaddamage");
+			StopSound(SND_CHANNEL_POWERUP_IDLE, false);
 		}
 	}
 	*/
 
 }
-/*
-=================
-idPlayer::SlowTime
-=================
-
-
-void idPlayer::SlowTime() {
-	STStart = gameLocal.time;
-	gameLocal.Printf("Timescale set from %f", timescale.GetFloat());
-	timescale.SetFloat(0.5f);
-	gameLocal.Printf(" to %f", timescale.GetFloat());
-	gameLocal.Printf(" at %i", STStart);
-
-}
-*/
 
 
 
