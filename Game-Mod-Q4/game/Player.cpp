@@ -1097,6 +1097,7 @@ idPlayer::idPlayer() {
 	//krg25
 	tslowed = false;
 
+
 	doInitWeapon			= false;
 	noclip					= false;
 	godmode					= false;
@@ -1518,6 +1519,7 @@ void idPlayer::Init( void ) {
 	const char			*value;
 	
 	tslowed = false;
+
 	
 	noclip					= false;
 	godmode					= false;
@@ -8638,10 +8640,19 @@ void idPlayer::PerformImpulse( int impulse ) {
 		}
 
  		case IMPULSE_51: {
-							 tslowed = true;
-		    //SlowTime( );
+			if (tslowed == true) {
+				tslowed = false;
+			}
+			else {
+				tslowed = true;
+			}
  			break;
  		}
+		
+		case IMPULSE_52: {
+			tslowed = false;
+			break;
+		}
 	} 
 
 //RAVEN BEGIN
@@ -8666,23 +8677,7 @@ void idPlayer::PerformImpulse( int impulse ) {
 #endif
 //RAVEN END
 }
-/*Krg25
-==============
-idPlayer::SlowTime
-==============
-*/
-/* I'm not smart enough to attempt this. I'll do it the hack way
-void idPlayer::SlowTime(void){
-	int start = gameLocal.time;
-	while (gameLocal.time < (start + 20000)){ //20 second time
-		//krgphysics->SetTimeScale(0.5f);
-		gameLocal.Printf("Impulse 51 " + gameLocal.time); //+ krgphysics->GetTimeScale());
-	}
-	//krgphysics->SetTimeScale(1.0f);
-	//set on a time for now, but we will work out "stamina"
-	return;
-}
-*/ 
+
 /*
 ==============
 idPlayer::HandleESC
@@ -9694,33 +9689,38 @@ void idPlayer::Think( void ) {
 		inBuyZone = false;
 
 	inBuyZonePrev = false;
-
-	//krg25 this definitely gets called I don't think this is the right place to do this...
-	if (tslowed){
-			//int start = gameLocal.time;
-			//while (gameLocal.time < (start + 20000)){ //20 second timer
-				//idPhysics_AF * phys = krgphysics();
-		float timescaleee = cvarSystem->GetCVarFloat("af_timeScale");
-		if (timescaleee == 1.0f){
-			gameLocal.Printf("Am I fucking retarded or NOT? %f", timescaleee);
-			cvarSystem->SetCVarFloat("af_timeScale", 0.2f);
-			float timescaleee = cvarSystem->GetCVarFloat("af_timeScale");
-			gameLocal.Printf("WELL!?!?!?! %f", timescaleee);
+	/*
+	if (tslowed) {
+		
+		if (timescale.GetFloat() == 1.0f) {
+			SlowTime();
 		}
-				//gameLocal.Printf("Impulse 51"); //+ krgphysics->GetTimeScale());
-			//krgphysics->SetTimeScale(1.0f);
-			//set on a time for now, but we will work out "stamina"
-
-		//timescale = 0.5
-		//timer that unsets tslowed when finished
+		else {
+			if (gameLocal.time = STStart + 5000) {
+				tslowed = false;
+			}
+		}
 	}
-	else{
-		//timescale = 1
-
-	}
-
+	*/
 
 }
+/*
+=================
+idPlayer::SlowTime
+=================
+
+
+void idPlayer::SlowTime() {
+	STStart = gameLocal.time;
+	gameLocal.Printf("Timescale set from %f", timescale.GetFloat());
+	timescale.SetFloat(0.5f);
+	gameLocal.Printf(" to %f", timescale.GetFloat());
+	gameLocal.Printf(" at %i", STStart);
+
+}
+*/
+
+
 
 /*
 =================

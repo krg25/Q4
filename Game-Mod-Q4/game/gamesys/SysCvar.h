@@ -171,6 +171,7 @@ extern idCVar	af_forceFriction;
 extern idCVar	af_maxLinearVelocity;
 extern idCVar	af_maxAngularVelocity;
 extern idCVar	af_timeScale;
+
 extern idCVar	af_jointFrictionScale;
 extern idCVar	af_contactFrictionScale;
 extern idCVar	af_highlightBody;
@@ -421,5 +422,5 @@ extern idCVar g_clientProjectileCollision;
 extern idCVar net_clientLagOMeter;
 
 extern idCVar net_warnStale;
-
+extern idCVar	timescale; //krg
 #endif /* !__SYS_CVAR_H__ */

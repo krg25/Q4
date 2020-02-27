@@ -687,6 +687,9 @@ public:
  	bool					IsInTeleport	( void );
 	bool					IsZoomed		( void );
 	bool					IsFlashlightOn	( void );
+	bool					IsSlowed		( void );
+	void 					SetSlowed(bool);
+
 	virtual bool			IsCrouching		( void ) const;
 	
 	// voice com muting
@@ -1156,8 +1159,13 @@ private:
 	int						weapon_fists;
 	//krg25
 	//idPhysics_AF *			c(void) { return af.GetPhysics(); } unneeded
-	void					SlowTime(void);
 	bool					tslowed;
+	//int						STStart;
+	//void					GetSTStart(int);
+	//int						SetSTStart(void);
+	//void					SlowTime(void);
+	//void					SetSlowed(bool set);
+	//bool					IsSlowed(void);
 
 
 	stateResult_t			State_Wait_Alive				( const stateParms_t& parms );
@@ -1196,8 +1204,24 @@ private:
 	stateResult_t			State_Legs_Dead					( const stateParms_t& parms );
 	
  	CLASS_STATES_PROTOTYPE( idPlayer );
+
 };
 
+ID_INLINE bool idPlayer::IsSlowed(void) {
+	return tslowed;
+}
+
+ID_INLINE void idPlayer::SetSlowed(bool set) {
+	tslowed = set;
+}
+/*
+ID_INLINE int idPlayer::GetSTStart(void) {
+	return STStart;
+}
+ID_INLINE void idPlayer::SetSTStart(int gtime) {
+	STStart = gtime;
+}
+*/
 ID_INLINE bool idPlayer::IsBeingTalkedTo( void ) {
 	return talkingNPC!=NULL;
 }

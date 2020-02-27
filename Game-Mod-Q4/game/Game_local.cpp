@@ -244,7 +244,6 @@ idGameLocal::Clear
 */
 void idGameLocal::Clear( void ) {
 	int i;
-
 	serverInfo.Clear();
 	numClients = 0;
 	for ( i = 0; i < MAX_CLIENTS; i++ ) {
@@ -587,6 +586,10 @@ void idGameLocal::Init( void ) {
 // RAVEN END
 
 	networkSystem->AddSortFunction( filterByMod );
+
+
+	//krg
+	STStart = 0;
 }
 
 /*
@@ -3482,6 +3485,7 @@ idGameLocal::RunFrame
 			currentThinkingEntity = player;
 			player->Think();
 			currentThinkingEntity = NULL;
+
 		}
 	} else do {
 		// update the game time KRG25 look here
@@ -3516,7 +3520,31 @@ TIME_THIS_SCOPE("idGameLocal::RunFrame - gameDebug.BeginFrame()");
 				gameRenderWorld->SetRenderView( view );
 			}
 		}
+		
+		if (player->IsSlowed()) {
+			gameLocal.Printf("Time: %i", time);
+			gameLocal.Printf(" Start Time: %i", STStart);
+			gameLocal.Printf("\n");
+			
+			if (timescale.GetFloat() == 1.0f) {
+				SetSTStart(time);
+				gameLocal.Printf("Timescale set from %f", timescale.GetFloat());
+				timescale.SetFloat(0.5f);
+				gameLocal.Printf(" to %f", timescale.GetFloat());
+				gameLocal.Printf(" at %i", GetSTStart());
+			}
 
+			if (time >= GetSTStart() + 5000) {
+				player->SetSlowed(false);
+			}
+		}
+		else {
+			if (STStart != 0) {
+				SetSTStart(0);
+				timescale.SetFloat(1.0f);
+			}
+		}
+		
 		// If modview is running then let it think
 		common->ModViewThink( );	
 

@@ -154,6 +154,7 @@ typedef struct entityNetEvent_s {
 	int						spawnId;
 	int						event;
 	int						time;
+	int						STSTime;
 	int						paramsSize;
 	byte					paramsBuf[MAX_EVENT_PARAM_SIZE];
 	struct entityNetEvent_s	*next;
@@ -390,7 +391,10 @@ public:
 	int						time;					// in msec
 	int						msec;					// time since last update in milliseconds
 	int						mHz;					// hertz
-
+	
+	int						STStart;
+	void	SetSTStart(int x) { STStart = x; }
+	int		GetSTStart(void) { return STStart; }
 	int						vacuumAreaNum;			// -1 if level doesn't have any outside areas
 
 // RAVEN BEGIN
@@ -1106,6 +1110,8 @@ private:
 	idList<mpBanInfo_t>		banList;
 	bool					banListLoaded;
 	bool					banListChanged;
+
+
 // RAVEN END
 };
 
