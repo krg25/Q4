@@ -8792,9 +8792,13 @@ void idPlayer::AdjustSpeed( void ) {
 		bobFrac = 0.0f;
  	} else if ( !physicsObj.OnLadder() && ( usercmd.buttons & BUTTON_RUN ) && ( usercmd.forwardmove || usercmd.rightmove ) && ( usercmd.upmove >= 0 ) ) {
 		bobFrac = 1.0f;
+		speed = pm_sprintspeed.GetFloat();
+	}/* else if (!physicsObj.OnLadder() && (usercmd.buttons & BUTTON_SPRINT) && (usercmd.forwardmove || usercmd.rightmove) && (usercmd.upmove >= 0)) {
+		bobFrac = 1.0f;
+		speed = pm_sprintspeed.GetFloat();
+		gameLocal.Printf("Sprinting at %f", speed);
+	} */else {
 		speed = pm_speed.GetFloat();
-	} else {
-		speed = pm_walkspeed.GetFloat();
 		bobFrac = 0.0f;
 	}
 

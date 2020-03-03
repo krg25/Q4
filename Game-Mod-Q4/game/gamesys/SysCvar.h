@@ -204,6 +204,7 @@ extern idCVar	pm_stepsize;
 extern idCVar	pm_crouchspeed;
 // RAVEN BEGIN
 extern idCVar	pm_speed;
+extern idCVar	pm_sprintspeed;
 extern idCVar	pm_walkspeed;
 extern idCVar	pm_zoomedSlow;
 extern idCVar 	pm_isZoomed;

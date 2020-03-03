@@ -33,10 +33,12 @@ const int BUTTON_INGAMESTATS	= BIT(5);
 // jscott: for voicechat
 const int BUTTON_VOICECHAT		= BIT(6);
 // ddynerman: tourney display
-const int BUTTON_TOURNEY		= BIT(7);
+const int BUTTON_SPRINT = BIT(7);
+//const int BUTTON_TOURNEY		= BIT(7);
 // twhitaker: strafe
 const int BUTTON_STRAFE			= BIT(8);
 // RAVEN END
+
 
 
 // usercmd_t->impulse commands
@@ -123,7 +125,7 @@ const int IMPULSE_125			= 125;			// Buy team powerup: damage_boost
 const int IMPULSE_126			= 126;			// UNUSED
 const int IMPULSE_127			= 127;			// UNUSED
 // RITUAL END
-const int IMPULSE_901 = 901;			// KRG25 for bullettime
+const int IMPULSE_901 = 901;			// KRG25 for bullettime not
 
 const int KEY_MOVESPEED			= 127;
 

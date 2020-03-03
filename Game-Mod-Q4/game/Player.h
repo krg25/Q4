@@ -327,6 +327,7 @@ public:
 		bool		onLadder		:1;
 		bool		dead			:1;
 		bool		run				:1;
+		//bool		sprint : 1; //krg
 		bool		pain			:1;
 		bool		hardLanding		:1;
 		bool		softLanding		:1;

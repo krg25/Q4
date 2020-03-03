@@ -3533,10 +3533,10 @@ TIME_THIS_SCOPE("idGameLocal::RunFrame - gameDebug.BeginFrame()");
 			*/
 			if (timescale.GetFloat() == 1.0f) {
 				SetSTStart(time);
-				gameLocal.Printf("Timescale set from %f", timescale.GetFloat());
+				//gameLocal.Printf("Timescale set from %f", timescale.GetFloat());
 				timescale.SetFloat(0.5f);
-				gameLocal.Printf(" to %f", timescale.GetFloat());
-				gameLocal.Printf(" at %i", GetSTStart());
+				//gameLocal.Printf(" to %f", timescale.GetFloat());
+				//gameLocal.Printf(" at %i", GetSTStart());
 				
 			}
 

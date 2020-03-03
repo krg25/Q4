@@ -101,7 +101,7 @@ void idProjectile::Spawn( void ) {
  	SetPhysics( &physicsObj );
 	prePredictTime = spawnArgs.GetInt( "predictTime", "0" );
 	syncPhysics = spawnArgs.GetBool( "net_syncPhysics", "0" );
-	gameLocal.Printf("projectile");
+	//gameLocal.Printf("projectile");
 
 	if ( gameLocal.isClient ) {
 		Hide();

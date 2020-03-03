@@ -1,6 +1,5 @@
-﻿Build started 2/27/2020 11:04:44 AM.
-     1>Project "C:\Users\PC\test\q4\Game-Mod-Q4\idlib.vcxproj" on node 2 (Build target(s)).
-     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (../projectile-conversion/) contains files shared from another project (game.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+﻿Build started 3/3/2020 10:58:32 AM.
+     1>Project "C:\Users\PC\test\q4\Game-Mod-Q4\idlib.vcxproj" on node 2 (Rebuild target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Imssdk/include /ZI /nologo /W4 /WX- /Od /Oy- /D _DEBUG /D _WINDOWS /D Q4SDK /D _MBCS /Gm- /EHsc /RTC1 /MTd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /GR /Yc /Fp"../projectile-conversion/idLib/idLib.pch" /Fo"../projectile-conversion/idLib/" /Fd"../projectile-conversion/idLib.pdb" /Gd /TP /analyze- /errorReport:prompt idlib\Lib.cpp
          Lib.cpp
@@ -38,7 +37,7 @@
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
      1>c:\users\pc\test\q4\game-mod-q4\game\script\script_interpreter.h(153): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Imssdk/include /ZI /nologo /W4 /WX- /Od /Oy- /D _DEBUG /D _WINDOWS /D Q4SDK /D _MBCS /Gm- /EHsc /RTC1 /MTd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /GR /Yu /Fp"../projectile-conversion/idLib/idLib.pch" /Fo"../projectile-conversion/idLib/" /Fd"../projectile-conversion/idLib.pdb" /Gd /TP /analyze- /errorReport:prompt idlib\Base64.cpp idlib\BitMsg.cpp idlib\CmdArgs.cpp idlib\Dict.cpp idlib\Heap.cpp idlib\LangDict.cpp idlib\Lexer.cpp idlib\LexerFactory.cpp idlib\Parser.cpp idlib\Str.cpp idlib\TextCompiler.cpp idlib\Timer.cpp idlib\TimingCollection.cpp idlib\Token.cpp idlib\bv\Bounds.cpp idlib\bv\Box.cpp idlib\bv\Frustum.cpp idlib\bv\Sphere.cpp idlib\containers\HashIndex.cpp idlib\geometry\JointTransform.cpp idlib\geometry\Surface.cpp idlib\geometry\Surface_Patch.cpp idlib\geometry\Surface_Polytope.cpp idlib\geometry\Surface_SweptSpline.cpp idlib\geometry\TraceModel.cpp idlib\geometry\Winding.cpp idlib\geometry\Winding2D.cpp idlib\hashing\CRC16.cpp idlib\hashing\CRC32.cpp idlib\hashing\CRC8.cpp idlib\hashing\Honeyman.cpp idlib\hashing\MD4.cpp idlib\hashing\MD5.cpp idlib\mapfile.cpp idlib\math\Angles.cpp idlib\math\Complex.cpp idlib\math\FFT.cpp idlib\math\Lcp.cpp idlib\math\Math.cpp idlib\math\Matrix.cpp idlib\math\Ode.cpp idlib\math\Plane.cpp idlib\math\Pluecker.cpp idlib\math\Polynomial.cpp idlib\math\Quat.cpp idlib\math\Radians.cpp idlib\math\Rotation.cpp idlib\math\Simd.cpp idlib\math\Simd_3DNow.cpp idlib\math\Simd_MMX.cpp idlib\math\Simd_SSE.cpp idlib\math\Simd_SSE2.cpp idlib\math\Simd_SSE3.cpp idlib\math\Simd_generic.cpp idlib\math\Vector.cpp idlib\rvHeap.cpp idlib\rvHeapArena.cpp idlib\rvMemSys.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Imssdk/include /ZI /nologo /W4 /WX- /Od /Oy- /D _DEBUG /D _WINDOWS /D Q4SDK /D _MBCS /Gm- /EHsc /RTC1 /MTd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /GR /Yu /Fp"../projectile-conversion/idLib/idLib.pch" /Fo"../projectile-conversion/idLib/" /Fd"../projectile-conversion/idLib.pdb" /Gd /TP /analyze- /errorReport:prompt idlib\Base64.cpp idlib\BitMsg.cpp idlib\CmdArgs.cpp idlib\Dict.cpp idlib\Heap.cpp idlib\LangDict.cpp idlib\Lexer.cpp idlib\LexerFactory.cpp idlib\mapfile.cpp idlib\Parser.cpp idlib\rvHeap.cpp idlib\rvHeapArena.cpp idlib\rvMemSys.cpp idlib\Str.cpp idlib\TextCompiler.cpp idlib\Timer.cpp idlib\TimingCollection.cpp idlib\Token.cpp idlib\bv\Bounds.cpp idlib\bv\Box.cpp idlib\bv\Frustum.cpp idlib\bv\Sphere.cpp idlib\containers\HashIndex.cpp idlib\geometry\JointTransform.cpp idlib\geometry\Surface.cpp idlib\geometry\Surface_Patch.cpp idlib\geometry\Surface_Polytope.cpp idlib\geometry\Surface_SweptSpline.cpp idlib\geometry\TraceModel.cpp idlib\geometry\Winding.cpp idlib\geometry\Winding2D.cpp idlib\math\Angles.cpp idlib\math\Complex.cpp idlib\math\FFT.cpp idlib\math\Lcp.cpp idlib\math\Math.cpp idlib\math\Matrix.cpp idlib\math\Ode.cpp idlib\math\Plane.cpp idlib\math\Pluecker.cpp idlib\math\Polynomial.cpp idlib\math\Quat.cpp idlib\math\Radians.cpp idlib\math\Rotation.cpp idlib\math\Simd.cpp idlib\math\Simd_3DNow.cpp idlib\math\Simd_generic.cpp idlib\math\Simd_MMX.cpp idlib\math\Simd_SSE.cpp idlib\math\Simd_SSE2.cpp idlib\math\Simd_SSE3.cpp idlib\math\Vector.cpp idlib\hashing\CRC16.cpp idlib\hashing\CRC32.cpp idlib\hashing\CRC8.cpp idlib\hashing\Honeyman.cpp idlib\hashing\MD4.cpp idlib\hashing\MD5.cpp
          Base64.cpp
          BitMsg.cpp
          CmdArgs.cpp
@@ -83,6 +82,13 @@
      1>c:\users\pc\test\q4\game-mod-q4\idlib\lexer.cpp(2761): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'vsprintf'
          LexerFactory.cpp
+         mapfile.cpp
+     1>c:\users\pc\test\q4\game-mod-q4\idlib\mapfile.cpp(726): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
+     1>c:\users\pc\test\q4\game-mod-q4\idlib\mapfile.cpp(1197): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\pc\test\q4\game-mod-q4\idlib\mapfile.cpp(1307): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
          Parser.cpp
      1>c:\users\pc\test\q4\game-mod-q4\idlib\parser.cpp(218): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
@@ -108,6 +114,15 @@
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
      1>c:\users\pc\test\q4\game-mod-q4\idlib\parser.cpp(2281): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+         rvHeap.cpp
+     1>c:\users\pc\test\q4\game-mod-q4\idlib\rvheap.cpp(7): warning C4627: '#include "../idlib/precompiled.h"': skipped when looking for precompiled header use
+                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
+         rvHeapArena.cpp
+     1>c:\users\pc\test\q4\game-mod-q4\idlib\rvheaparena.cpp(7): warning C4627: '#include "../idlib/precompiled.h"': skipped when looking for precompiled header use
+                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
+         rvMemSys.cpp
+     1>c:\users\pc\test\q4\game-mod-q4\idlib\rvmemsys.cpp(7): warning C4627: '#include "../idlib/precompiled.h"': skipped when looking for precompiled header use
+                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
          Str.cpp
      1>c:\users\pc\test\q4\game-mod-q4\idlib\str.cpp(217): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
@@ -145,6 +160,8 @@
          Box.cpp
      1>c:\users\pc\test\q4\game-mod-q4\idlib\bv\box.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
                  Add directive to 'precompiled header (.h) file' or rebuild precompiled header
+         Generating Code...
+         Compiling...
          Frustum.cpp
      1>c:\users\pc\test\q4\game-mod-q4\idlib\bv\frustum.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
                  Add directive to 'precompiled header (.h) file' or rebuild precompiled header
@@ -157,8 +174,6 @@
          JointTransform.cpp
      1>c:\users\pc\test\q4\game-mod-q4\idlib\geometry\jointtransform.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
                  Add directive to 'precompiled header (.h) file' or rebuild precompiled header
-         Generating Code...
-         Compiling...
          Surface.cpp
      1>c:\users\pc\test\q4\game-mod-q4\idlib\geometry\surface.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
                  Add directive to 'precompiled header (.h) file' or rebuild precompiled header
@@ -180,31 +195,6 @@
          Winding2D.cpp
      1>c:\users\pc\test\q4\game-mod-q4\idlib\geometry\winding2d.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
                  Add directive to 'precompiled header (.h) file' or rebuild precompiled header
-         CRC16.cpp
-     1>c:\users\pc\test\q4\game-mod-q4\idlib\hashing\crc16.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
-                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
-         CRC32.cpp
-     1>c:\users\pc\test\q4\game-mod-q4\idlib\hashing\crc32.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
-                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
-         CRC8.cpp
-     1>c:\users\pc\test\q4\game-mod-q4\idlib\hashing\crc8.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
-                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
-         Honeyman.cpp
-     1>c:\users\pc\test\q4\game-mod-q4\idlib\hashing\honeyman.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
-                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
-         MD4.cpp
-     1>c:\users\pc\test\q4\game-mod-q4\idlib\hashing\md4.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
-                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
-         MD5.cpp
-     1>c:\users\pc\test\q4\game-mod-q4\idlib\hashing\md5.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
-                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
-         mapfile.cpp
-     1>c:\users\pc\test\q4\game-mod-q4\idlib\mapfile.cpp(726): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(304) : see declaration of 'sscanf'
-     1>c:\users\pc\test\q4\game-mod-q4\idlib\mapfile.cpp(1197): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-     1>c:\users\pc\test\q4\game-mod-q4\idlib\mapfile.cpp(1307): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
          Angles.cpp
      1>c:\users\pc\test\q4\game-mod-q4\idlib\math\angles.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
                  Add directive to 'precompiled header (.h) file' or rebuild precompiled header
@@ -223,8 +213,6 @@
          Matrix.cpp
      1>c:\users\pc\test\q4\game-mod-q4\idlib\math\matrix.cpp(1): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
                  Add directive to 'precompiled header (.h) file' or rebuild precompiled header
-         Generating Code...
-         Compiling...
          Ode.cpp
      1>c:\users\pc\test\q4\game-mod-q4\idlib\math\ode.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
                  Add directive to 'precompiled header (.h) file' or rebuild precompiled header
@@ -234,6 +222,8 @@
          Pluecker.cpp
      1>c:\users\pc\test\q4\game-mod-q4\idlib\math\pluecker.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
                  Add directive to 'precompiled header (.h) file' or rebuild precompiled header
+         Generating Code...
+         Compiling...
          Polynomial.cpp
      1>c:\users\pc\test\q4\game-mod-q4\idlib\math\polynomial.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
                  Add directive to 'precompiled header (.h) file' or rebuild precompiled header
@@ -252,6 +242,9 @@
          Simd_3DNow.cpp
      1>c:\users\pc\test\q4\game-mod-q4\idlib\math\simd_3dnow.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
                  Add directive to 'precompiled header (.h) file' or rebuild precompiled header
+         Simd_generic.cpp
+     1>c:\users\pc\test\q4\game-mod-q4\idlib\math\simd_generic.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
+                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
          Simd_MMX.cpp
      1>c:\users\pc\test\q4\game-mod-q4\idlib\math\simd_mmx.cpp(1): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
                  Add directive to 'precompiled header (.h) file' or rebuild precompiled header
@@ -264,20 +257,26 @@
          Simd_SSE3.cpp
      1>c:\users\pc\test\q4\game-mod-q4\idlib\math\simd_sse3.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
                  Add directive to 'precompiled header (.h) file' or rebuild precompiled header
-         Simd_generic.cpp
-     1>c:\users\pc\test\q4\game-mod-q4\idlib\math\simd_generic.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
-                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
          Vector.cpp
      1>c:\users\pc\test\q4\game-mod-q4\idlib\math\vector.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
                  Add directive to 'precompiled header (.h) file' or rebuild precompiled header
-         rvHeap.cpp
-     1>c:\users\pc\test\q4\game-mod-q4\idlib\rvheap.cpp(7): warning C4627: '#include "../idlib/precompiled.h"': skipped when looking for precompiled header use
+         CRC16.cpp
+     1>c:\users\pc\test\q4\game-mod-q4\idlib\hashing\crc16.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
                  Add directive to 'precompiled header (.h) file' or rebuild precompiled header
-         rvHeapArena.cpp
-     1>c:\users\pc\test\q4\game-mod-q4\idlib\rvheaparena.cpp(7): warning C4627: '#include "../idlib/precompiled.h"': skipped when looking for precompiled header use
+         CRC32.cpp
+     1>c:\users\pc\test\q4\game-mod-q4\idlib\hashing\crc32.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
                  Add directive to 'precompiled header (.h) file' or rebuild precompiled header
-         rvMemSys.cpp
-     1>c:\users\pc\test\q4\game-mod-q4\idlib\rvmemsys.cpp(7): warning C4627: '#include "../idlib/precompiled.h"': skipped when looking for precompiled header use
+         CRC8.cpp
+     1>c:\users\pc\test\q4\game-mod-q4\idlib\hashing\crc8.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
+                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
+         Honeyman.cpp
+     1>c:\users\pc\test\q4\game-mod-q4\idlib\hashing\honeyman.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
+                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
+         MD4.cpp
+     1>c:\users\pc\test\q4\game-mod-q4\idlib\hashing\md4.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
+                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
+         MD5.cpp
+     1>c:\users\pc\test\q4\game-mod-q4\idlib\hashing\md5.cpp(2): warning C4627: '#include "../precompiled.h"': skipped when looking for precompiled header use
                  Add directive to 'precompiled header (.h) file' or rebuild precompiled header
          Generating Code...
        Lib:
@@ -341,8 +340,8 @@
          "../projectile-conversion/idLib/MD4.obj"
          "../projectile-conversion/idLib/MD5.obj"
          idlib.vcxproj -> C:\Users\PC\test\q4\Game-Mod-Q4\../projectile-conversion/idLib.lib
-     1>Done Building Project "C:\Users\PC\test\q4\Game-Mod-Q4\idlib.vcxproj" (Build target(s)).
+     1>Done Building Project "C:\Users\PC\test\q4\Game-Mod-Q4\idlib.vcxproj" (Rebuild target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:06.67
+Time Elapsed 00:00:06.68
