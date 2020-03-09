@@ -3422,7 +3422,15 @@ void idPlayer::UpdateHudStats( idUserInterface *_hud ) {
 		_hud->SetStateFloat	( "player_healthpct", idMath::ClampFloat ( 0.0f, 1.0f, (float)health / (float)inventory.maxHealth ) );
 		_hud->HandleNamedEvent ( "updateHealth" );
 	}
-		
+	temp = _hud->State().GetInt("player_armor", "-1");
+	if (temp != (int)physicsObj.getGas()) {
+		_hud->SetStateInt("player_armorDelta", temp == -1 ? 0 : (temp - (int)physicsObj.getGas()));
+		_hud->SetStateInt("player_armor", (int)physicsObj.getGas());
+		_hud->SetStateFloat("player_armorpct", idMath::ClampFloat(0.0f, 1.0f, physicsObj.getGas() / 50.0f));
+		_hud->HandleNamedEvent("updateArmor");
+	}
+		//default armor info
+	/*
 	temp = _hud->State().GetInt ( "player_armor", "-1" );
 	if ( temp != inventory.armor ) {
 		_hud->SetStateInt ( "player_armorDelta", temp == -1 ? 0 : (temp - inventory.armor) );
@@ -3430,6 +3438,7 @@ void idPlayer::UpdateHudStats( idUserInterface *_hud ) {
 		_hud->SetStateFloat	( "player_armorpct", idMath::ClampFloat ( 0.0f, 1.0f, (float)inventory.armor / (float)inventory.maxarmor ) );
 		_hud->HandleNamedEvent ( "updateArmor" );
 	}
+	*/
 	
 	// Boss bar
 	if ( _hud->State().GetInt ( "boss_health", "-1" ) != (bossEnemy ? bossEnemy->health : -1) ) {
@@ -9094,6 +9103,7 @@ void idPlayer::Move( void ) {
 		pfl.crouch	= physicsObj.IsCrouching();
 		pfl.onGround	= physicsObj.HasGroundContacts();
 		pfl.onLadder	= physicsObj.OnLadder();
+		//krg25
 		pfl.jump		= physicsObj.HasJumped();
 
  		// check if we're standing on top of a monster and give a push if we are
@@ -9122,7 +9132,7 @@ void idPlayer::Move( void ) {
 		acc->dir[2] = 200;
 		acc->dir[0] = acc->dir[1] = 0;
 	}
-
+	
 	if ( pfl.onLadder ) {
 		int old_rung = oldOrigin.z / LADDER_RUNG_DISTANCE;
  		int new_rung = physicsObj.GetOrigin().z / LADDER_RUNG_DISTANCE;
@@ -9137,7 +9147,7 @@ void idPlayer::Move( void ) {
 	BobCycle( pushVelocity );
 
 // RAVEN BEGIN
-// abahr: don't crashland while no clipping.
+// abahr: don't crashland while no clipping. this is our falling damage function
 	if( !noclip ) {
 		CrashLand( oldOrigin, oldVelocity );
 	}
@@ -9853,7 +9863,7 @@ void idPlayer::Killed( idEntity *inflictor, idEntity *attacker, int damage, cons
 						}
 						else
 						{
-							// Killed by enemy
+							// Killed by enemy KRG25 important for getting XP maybe
 							float cashAward = (float) gameLocal.mpGame.mpBuyingManager.GetOpponentKillCashAward();
 							killer->GiveCash( cashAward );
 						}
@@ -12436,6 +12446,8 @@ void idPlayer::WriteToSnapshot( idBitMsgDelta &msg ) const {
 //RITUAL BEGIN
 	msg.WriteBits( inBuyZone, 1 );
 	msg.WriteLong( (int)buyMenuCash );
+	msg.WriteLong((int)playerExperience);
+	//msg.WriteLong((int)buyMenuCash);
 //RITUAL END
 }
 
@@ -12550,7 +12562,7 @@ void idPlayer::ReadFromSnapshot( const idBitMsgDelta &msg ) {
 			rvWeapon::SkipFromSnapshot( msg );
 		}
 	}
-	if ( proto69 ) {
+	if ( proto69 ) { //krg
 		inBuyZone = msg.ReadBits(1) != 0;
 		int cash = msg.ReadLong();
 		if (cash != (int)buyMenuCash) {
@@ -14072,7 +14084,7 @@ bool idPlayer::AllowedVoiceDest( int from ) {
 	return false;
 }
 
-// RITUAL BEGIN
+// RITUAL BEGIN might be able to repurpose all of this for experience
 void idPlayer::ClampCash( float minCash, float maxCash )
 {
 	if( buyMenuCash < minCash )

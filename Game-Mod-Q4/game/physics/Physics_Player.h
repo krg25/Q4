@@ -73,6 +73,7 @@ public:
 	waterLevel_t			GetWaterLevel( void ) const;
 	int						GetWaterType( void ) const;
 	bool					HasJumped( void ) const;
+	bool					HasDJumped(void) const;
 	bool					HasSteppedUp( void ) const;
 	float					GetStepUp( void ) const;
 	bool					IsCrouching( void ) const;
@@ -115,6 +116,7 @@ public:	// common physics interface
 // kfuller: Added
 	bool					IsNoclip( void ) const;
 	bool					IsDead( void ) const;
+	float					getGas(void) const;
 // RAVEN END
 
 	void					SetClipModelNoLink( idClipModel *clip );
@@ -130,6 +132,7 @@ private:
 	float					maxStepHeight;
 	float					maxJumpHeight;
 	int						debugLevel;				// if set, diagnostic output will be printed
+	float gas; //for jetpack
 
 	// player input
 	usercmd_t				command;
@@ -156,6 +159,8 @@ private:
 	waterLevel_t			waterLevel;
 	int						waterType;
 
+	bool djump;
+
 private:
 	float					CmdScale( const usercmd_t &cmd ) const;
 	void					Accelerate( const idVec3 &wishdir, const float wishspeed, const float accel );
@@ -178,6 +183,7 @@ private:
 	void					CheckDuck( void );
 	void					CheckLadder( void );
 	bool					CheckJump( void );
+	bool					CheckDJump(void);
 	bool					CheckWaterJump( void );
 	void					SetWaterLevel( void );
 	void					DropTimers( void );
@@ -193,6 +199,9 @@ ID_INLINE bool idPhysics_Player::IsNoclip( void ) const {
 
 ID_INLINE bool idPhysics_Player::IsDead( void ) const {
 	return current.movementType == PM_DEAD;
+}
+ID_INLINE float idPhysics_Player::getGas(void) const {
+	return gas;
 }
 
 #endif /* !__PHYSICS_PLAYER_H__ */

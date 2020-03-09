@@ -32,6 +32,9 @@ const float PM_SLIDEFRICTION    = 0.5f;
 const float MIN_WALK_NORMAL		= 0.7f;		// can't walk on very steep slopes
 const float OVERCLIP			= 1.001f;
 
+const float PM_MAXGAS = 50.0f;
+const float PM_MINGAS = 0.0f;
+
 // movementFlags
 const int PMF_DUCKED			= 1;		// set when ducking
 const int PMF_JUMPED			= 2;		// set when the player jumped this frame
@@ -663,7 +666,10 @@ void idPhysics_Player::AirMove( void ) {
 	wishdir = wishvel;
 	wishspeed = wishdir.Normalize();
 	wishspeed *= scale;
-
+	//gameLocal.Printf("Djump = %d",djump);
+	if (gas > PM_MINGAS){
+		djump = idPhysics_Player::CheckJump();
+	}
 	// not on ground, so little effect on velocity
 	idPhysics_Player::Accelerate( wishdir, wishspeed, Pm_AirAccelerate() );
 
@@ -691,6 +697,9 @@ void idPhysics_Player::WalkMove( void ) {
 	float		accelerate;
 	idVec3		oldVelocity, vel;
 	float		oldVel, newVel;
+
+	if (gas < PM_MAXGAS){ gas = gas + 0.5f; }
+
 
 	if ( waterLevel > WATERLEVEL_WAIST && ( viewForward * groundTrace.c.normal ) > 0.0f ) {
 		// begin swimming
@@ -1099,7 +1108,7 @@ void idPhysics_Player::CheckGround( bool checkStuck ) {
 
 		return;
 	}
-
+	djump = false;
 	groundPlane = true;
 	walking = true;
 
@@ -1289,12 +1298,19 @@ bool idPhysics_Player::CheckJump( void ) {
 		return false;
 	}
 
+	
 	groundPlane = false;		// jumping away
 	walking = false;
+	gas = gas - 0.5f;
+	/*
+	gameLocal.Printf("gas: %f", gas);
+	gameLocal.Printf("\n");
+	*/
+	//krg25, removing jump limit? no but this allows me to BHOP immediately
+	//im going to leave this commented out for my jetpack move
+	//current.movementFlags |= PMF_JUMP_HELD;// | PMF_JUMPED;
 
-	current.movementFlags |= PMF_JUMP_HELD | PMF_JUMPED;
-
-	addVelocity = 2.0f * maxJumpHeight * -gravityVector;
+	addVelocity = 1.0f *-gravityVector;//* maxJumpHeight * -gravityVector;
 	addVelocity *= idMath::Sqrt( addVelocity.Normalize() );
 	current.velocity += addVelocity;
 
@@ -1451,7 +1467,7 @@ void idPhysics_Player::MovePlayer( int msec ) {
 	// this counter lets us debug movement problems with a journal
 	// by setting a conditional breakpoint for the previous frame
 	c_pmove++;
-
+	djump = false;
 	walking = false;
 	groundPlane = false;
 	ladder = false;
@@ -1673,10 +1689,12 @@ idPhysics_Player::idPhysics_Player( void ) {
 	framemsec = 0;
 	frametime = 0;
 	playerSpeed = 0;
+	gas = 50.0f;
 	viewForward.Zero();
 	viewRight.Zero();
 	walking = false;
 	groundPlane = false;
+	djump = false;
 	memset( &groundTrace, 0, sizeof( groundTrace ) );
 	groundMaterial = NULL;
 	ladder = false;
@@ -1738,6 +1756,7 @@ void idPhysics_Player::Save( idSaveGame *savefile ) const {
 	idPhysics_Player_SavePState( savefile, saved );
 
 	savefile->WriteFloat( walkSpeed );
+	savefile->WriteFloat(gas);
 	savefile->WriteFloat( crouchSpeed );
 	savefile->WriteFloat( maxStepHeight );
 	savefile->WriteFloat( maxJumpHeight );
@@ -1775,6 +1794,7 @@ void idPhysics_Player::Restore( idRestoreGame *savefile ) {
 	idPhysics_Player_RestorePState( savefile, saved );
 
 	savefile->ReadFloat( walkSpeed );
+	savefile->ReadFloat(gas);
 	savefile->ReadFloat( crouchSpeed );
 	savefile->ReadFloat( maxStepHeight );
 	savefile->ReadFloat( maxJumpHeight );

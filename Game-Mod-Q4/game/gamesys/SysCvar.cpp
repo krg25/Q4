@@ -129,7 +129,7 @@ idCVar ui_ready(					"ui_ready",				si_readyArgs[ 0 ],	CVAR_GAME | CVAR_USERINFO
 idCVar ui_spectate(					"ui_spectate",		si_spectateArgs[ 0 ],	CVAR_GAME | CVAR_USERINFO, "play or spectate", idCmdSystem::ArgCompletion_String<si_spectateArgs> );
 idCVar ui_chat(						"ui_chat",					"0",			CVAR_GAME | CVAR_USERINFO | CVAR_BOOL | CVAR_ROM | CVAR_CHEAT, "player is chatting" );
 
-// change anytime vars
+// change anytime vars KRG changed this
 idCVar developer(					"developer",				"0",			CVAR_GAME | CVAR_BOOL, "" );
 
 idCVar g_forceModel(				"g_forceModel",				"",			CVAR_GAME | CVAR_ARCHIVE, "Locally forces all players to this model in non-team gameplay modes.  See g_forceStroggModel, g_forceMarineModel.  listModels to list available models", idCmdSystem::ArgCompletion_ForceModel );
