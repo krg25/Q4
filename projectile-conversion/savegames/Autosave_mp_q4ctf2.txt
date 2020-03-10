@@ -1,0 +1,4 @@
+"Autosave mp/q4ctf2"
+"^:Map Start	^0DEATH BEFORE DISHONOR"
+"gfx/guis/loadscreens/q4ctf2"
+nooverwrite

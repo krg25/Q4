@@ -1035,6 +1035,8 @@ private:
 
 	void					StopFiring( void );
 	void					FireWeapon( void );
+	void					quickMelee(void);
+	void					stopMelee(void);
 	void					Weapon_Combat( void );
 	void					Weapon_NPC( void );
 	void					Weapon_GUI( void );
@@ -1161,12 +1163,9 @@ private:
 	//krg25
 	//idPhysics_AF *			c(void) { return af.GetPhysics(); } unneeded
 	bool					tslowed;
-	//int						STStart;
-	//void					GetSTStart(int);
-	//int						SetSTStart(void);
-	//void					SlowTime(void);
-	//void					SetSlowed(bool set);
-	//bool					IsSlowed(void);
+	bool					qmelee;
+	int						meleeTime;
+
 
 
 	stateResult_t			State_Wait_Alive				( const stateParms_t& parms );

@@ -1096,6 +1096,8 @@ idPlayer::idPlayer() {
 	alreadyDidTeamAnnouncerSound = false;
 	//krg25
 	tslowed = false;
+	qmelee = false;
+	meleeTime = 0;
 
 
 	doInitWeapon			= false;
@@ -1519,6 +1521,8 @@ void idPlayer::Init( void ) {
 	const char			*value;
 	
 	tslowed = false;
+	qmelee = false;
+	meleeTime = 100;
 
 	
 	noclip					= false;
@@ -2113,6 +2117,8 @@ void idPlayer::Save( idSaveGame *savefile ) const {
 
 	playerView.Save( savefile );
 	savefile->WriteBool(tslowed);
+	savefile->WriteBool(qmelee);
+	savefile->WriteInt(meleeTime);
 	savefile->WriteBool( noclip );
 	savefile->WriteBool( godmode );
 	savefile->WriteInt ( godmodeDamage );	
@@ -2375,6 +2381,8 @@ void idPlayer::Restore( idRestoreGame *savefile ) {
 
 	playerView.Restore( savefile );
 	savefile->ReadBool(tslowed);
+	savefile->ReadBool(qmelee);
+	savefile->ReadInt(meleeTime);
 	savefile->ReadBool( noclip );
 	savefile->ReadBool( godmode );
 	savefile->ReadInt ( godmodeDamage );	
@@ -8467,6 +8475,21 @@ void idPlayer::GenerateImpulseForBuyAttempt( const char* itemName ) {
 }
 // RITUAL END
 
+//idplayer::quickMelee KRG25
+void idPlayer::quickMelee( void ) {
+	//int oldcurrent = currentWeapon;
+	if (currentWeapon != 9){
+		SetWeapon(9); //9 is assigned to gauntlet
+		FireWeapon();
+	}
+
+}
+void idPlayer::stopMelee(void) {
+	//int oldcurrent = currentWeapon;
+	StopFiring();
+	//SetWeapon(oldcurrent); 
+}
+
 
 /*
 ==============
@@ -8499,7 +8522,7 @@ void idPlayer::PerformImpulse( int impulse ) {
 		ClientSendEvent( EVENT_IMPULSE, &msg );
 	}
 
-	if ( impulse >= IMPULSE_0 && impulse <= IMPULSE_12 ) { //changed from <= IMPULSE_12
+	if ( impulse >= IMPULSE_0 && impulse < IMPULSE_12 ) { //changed from <= IMPULSE_12
 		SelectWeapon( impulse, false );
 		return;
 	}
@@ -8523,6 +8546,12 @@ void idPlayer::PerformImpulse( int impulse ) {
 		//krg25: it looks like raven had an IMPULSE_12 that would show a PDA? Is that a holdover from doom?  maybe I can use that for my perk menu
 		//still looking to use the buy menu because it has a system that exists, it has credit reward for kills and function to spend
 		case IMPULSE_12: {
+							 //gonna use this to quick swap gauntlet and then attack in the same move, then return to prev weapon
+
+							 qmelee = true;
+				 
+				 return;
+
 
 			
 			break;
@@ -8558,7 +8587,7 @@ void idPlayer::PerformImpulse( int impulse ) {
 			break;
 		}
 		case IMPULSE_19: {
-							 gameLocal.Printf("Impulse 19 read");
+							// gameLocal.Printf("Impulse 19 read");
 		 if (!gameLocal.isMultiplayer) {
 			 if (objectiveSystemOpen) {
 				TogglePDA();
