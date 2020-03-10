@@ -1,0 +1,43 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (../Win32/Release\) contains files shared from another project (game.vcxproj, idLib.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  AF.cpp
+c:\users\k\git\q4\game-mod-q4\idlib\../idlib/Lib.h(120): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          E:\visual studio\VC\include\string.h(112) : see declaration of 'strcpy'
+c:\users\k\git\q4\game-mod-q4\idlib\Str.h(406): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          E:\visual studio\VC\include\string.h(112) : see declaration of 'strcpy'
+c:\users\k\git\q4\game-mod-q4\idlib\Str.h(446): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          E:\visual studio\VC\include\string.h(112) : see declaration of 'strcpy'
+c:\users\k\git\q4\game-mod-q4\idlib\Str.h(501): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          E:\visual studio\VC\include\stdio.h(356) : see declaration of 'sprintf'
+c:\users\k\git\q4\game-mod-q4\idlib\Str.h(503): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          E:\visual studio\VC\include\string.h(112) : see declaration of 'strcpy'
+c:\users\k\git\q4\game-mod-q4\idlib\Str.h(512): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          E:\visual studio\VC\include\stdio.h(356) : see declaration of 'sprintf'
+c:\users\k\git\q4\game-mod-q4\idlib\Str.h(514): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          E:\visual studio\VC\include\string.h(112) : see declaration of 'strcpy'
+c:\users\k\git\q4\game-mod-q4\idlib\Str.h(527): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          E:\visual studio\VC\include\string.h(112) : see declaration of 'strcpy'
+c:\users\k\git\q4\game-mod-q4\idlib\Str.h(605): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          E:\visual studio\VC\include\stdio.h(356) : see declaration of 'sprintf'
+c:\users\k\git\q4\game-mod-q4\idlib\Str.h(615): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          E:\visual studio\VC\include\stdio.h(356) : see declaration of 'sprintf'
+c:\users\k\git\q4\game-mod-q4\idlib\Str.h(625): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          E:\visual studio\VC\include\stdio.h(356) : see declaration of 'sprintf'
+c:\users\k\git\q4\game-mod-q4\idlib\Str.h(634): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          E:\visual studio\VC\include\stdio.h(356) : see declaration of 'sprintf'
+c:\users\k\git\q4\game-mod-q4\idlib\Str.h(643): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          E:\visual studio\VC\include\stdio.h(356) : see declaration of 'sprintf'
+c:\users\k\git\q4\game-mod-q4\idlib\Str.h(652): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          E:\visual studio\VC\include\stdio.h(356) : see declaration of 'sprintf'
+c:\users\k\git\q4\game-mod-q4\idlib\Base64.h(80): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          E:\visual studio\VC\include\string.h(112) : see declaration of 'strcpy'
+c:\users\k\git\q4\game-mod-q4\mpgame\script/Script_Interpreter.h(151): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          E:\visual studio\VC\include\stdio.h(356) : see declaration of 'sprintf'
+c:\users\k\git\q4\game-mod-q4\mpgame\script/Script_Interpreter.h(153): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          E:\visual studio\VC\include\stdio.h(356) : see declaration of 'sprintf'
+mpgame\AF.cpp(1152): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          E:\visual studio\VC\include\stdio.h(304) : see declaration of 'sscanf'
+mpgame\AF.cpp(1282): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          E:\visual studio\VC\include\stdio.h(304) : see declaration of 'sscanf'
+mpgame\AF.cpp(1290): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          E:\visual studio\VC\include\stdio.h(304) : see declaration of 'sscanf'
+MSBUILD : error MSB4166: Child node "2" exited prematurely. Shutting down. Diagnostic information may be found in files in "C:\Users\K\AppData\Local\Temp\" and will be named MSBuild_*.failure.txt. This location can be changed by setting the MSBUILDDEBUGPATH environment variable to a different directory.

@@ -639,7 +639,7 @@ entityDef player_marine
 	"weapon0_best"						"1"			// whether weapon should be chosen when out of ammo
 	"weapon0_cycle"						"1"			// whether weapon should be selected when using next/prev weapon
 	"weapon0_toggle"					"0"			// whether selecting weapon twice switches between current and previous weapons
-	"weapon0_flashlight"					"1"
+	"weapon0_flashlight"				"1"
 
 	"def_weapon1"						"weapon_machinegun"
 	"weapon1_best"						"1"
@@ -675,14 +675,20 @@ entityDef player_marine
 	"weapon8_best"						"1"
 	"weapon8_cycle"						"1"
 
-	"def_weapon9"						"weapon_dmg"
+	"def_weapon9"						"weapon_gauntlet"
 	"weapon9_best"						"0"
 	"weapon9_cycle"						"1"
 
 	"def_weapon10"						"weapon_napalmgun"
 	"weapon10_best"						"0"
 	"weapon10_cycle"					"1"	
-
+	/*
+	"def_weapon11"						"weapon_gauntlet"
+	"weapon11_best"						"1"			// whether weapon should be chosen when out of ammo
+	"weapon11_cycle"					"1"			// whether weapon should be selected when using next/prev weapon
+	"weapon11_toggle"					"0"			// whether selecting weapon twice switches between current and previous weapons
+	"weapon11_flashlight"				"0"
+	*/
 	"mtr_wound"						"textures/decals/hurt02"
 	"mtr_splat"						"textures/decals/dsplat2"
 	"mtr_splat2"						"textures/decals/dsplat5"
@@ -692,7 +698,7 @@ entityDef player_marine
 	// default weapons
 	// seperate multiple weapons with commas (no spaces).
 	// NOTE: default ammo must be specified explicitly.
-	"weapon"						"weapon_blaster"
+	"weapon"						"weapon_blaster,weapon_gauntlet"
 	"current_weapon"					"0"
 
 	"pm_jumpheight"						"48"
@@ -802,10 +808,10 @@ entityDef player_marine
 
 	// these used to be hard coded values from id
 	// doom 3 SP values, fatal 65, hard 45, soft 30, no fall 7
-	"fatal_fall_delta"					"65"
-	"hard_fall_delta"					"45"
-	"soft_fall_delta"					"30"
-	"no_fall_delta"						"7" 
+	"fatal_fall_delta"		"0"
+	"hard_fall_delta"		"60"
+	"soft_fall_delta"		"40"
+	"no_fall_delta"			"7" 
 	
 	"def_playerView"					"playerView_marine"
 }

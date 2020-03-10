@@ -38,6 +38,7 @@ windowDef Desktop
 	onInit {
 		namedEvent "updateHealth";
 		namedEvent "updateArmor";
+		namedEvent "updateGas";
 		namedEvent "updateAmmo";		
 		namedEvent "clipCheck";
 		namedEvent "updatePowerups";
@@ -51,6 +52,7 @@ windowDef Desktop
 		set "p_ammo::visible" "0" ;
 		set "p_armor::visible" "0" ;
 		set "p_health::visible" "0" ;
+		set "p_gas::visible" "0" ;
 		set "p_weapswitch::visible" "0" ;
 		set "powerups::visible" "0" ;		
 	}
@@ -60,6 +62,7 @@ windowDef Desktop
 		set "p_ammo::visible" "1" ;
 		set "p_armor::visible" "1" ;
 		set "p_health::visible" "1" ;
+		set "p_gas::visible" "1" ;
 		set "p_weapswitch::visible" "1" ;
 		set "powerups::visible" "1" ;	
 	}
@@ -179,6 +182,12 @@ windowDef Desktop
 		if ( "gui::player_armordelta" < 0 )
 		{
 			resettime "armor_amount" "0" ;
+		}
+	}
+	onNamedEvent updateGas {
+		if ( "gui::player_gasdelta" < 0 )
+		{
+			resettime "gas_amount" "0" ;
 		}
 	}
 	
@@ -378,6 +387,9 @@ windowDef Desktop
 		set "armor_valbar_mp::matcolor" "0.698,0.811,0.427,0.2" ;
 		set "armor_val_mp::matcolor" "0.698,0.811,0.427,0.5" ;
 		
+		set "gas_valbar_mp::matcolor" "0.698,0.811,0.427,0.2" ;
+		set "gas_val_mp::matcolor" "0.698,0.811,0.427,0.5" ;
+		
 		set "powerup_flag_icon::matcolor" "1,0.482,0.0156,0.8";
 		
 		set "desktop::teamstrogg" "0" ;
@@ -387,6 +399,9 @@ windowDef Desktop
 		set "health_valbar_mp::matcolor" "1,0.5,0,0.2" ;
 		set "health_val_mp::matcolor" "1,0.5,0,0.5" ;
 		
+		set "gas_valbar_mp::matcolor" "1,0.5,0,0.2" ;
+		set "gas_val_mp::matcolor" "1,0.5,0,0.5" ;
+		
 		set "armor_valbar_mp::matcolor" "1,0.5,0,0.2" ;
 		set "armor_val_mp::matcolor" "1,0.5,0,0.5" ;
 		
@@ -395,12 +410,14 @@ windowDef Desktop
 		set "desktop::teamstrogg" "1" ;
 	}	
 	
+	
 	onNamedEvent enterFlatbed
 	{
 		set "p_flatbed::visible" "1";
 		set "p_ammo::visible" "0";
 		set "p_health::visible" "0";
 		set "p_armor::visible" "0";
+		set "p_gas::visible" "0";
 	}
 		
 	onNamedEvent leaveFlatbed
@@ -409,6 +426,7 @@ windowDef Desktop
 		set "p_ammo::visible" "1";
 		set "p_health::visible" "1";
 		set "p_armor::visible" "1";
+		set "p_gas::visible" "1";
 	}	
 		
 	onNamedEvent saveMessage {
@@ -608,7 +626,80 @@ windowDef Desktop
 			font	"fonts/lowpixel"
 		}
 	}	
+//-----------------------		
+// gas
+//-----------------------		
 	
+	windowDef p_gas
+	{
+		rect	0,0,640,480
+		visible	("gui::player_gas" > 0 && "gui::mp" == 0 )
+		windowDef gas_backbar
+		{
+			rect	462,420,125,59
+			visible	1
+			background	"gfx/guis/hud/backbar"
+			matcolor	0,0,0,0.5
+			shear	0,-.22
+		}
+		windowDef gas_valbar
+		{
+			rect	462,420,125,59
+			visible	1
+			background	"gfx/guis/hud/arbar"
+			matcolor	0.698,0.811,0.427,0.2
+			shear	0,-.22
+		}
+		windowDef p_gas_val
+		{
+			rect	582 - ( "gui::player_gaspct" * 115 ),420,115,59
+			visible	1
+			shear	0,-.22
+			windowDef gas_val
+			{
+				rect	-120 + ( "gui::player_gaspct" * 115 ),0,125,59
+				visible	1
+				background	"gfx/guis/hud/arbar"
+				matcolor	0.698,0.811,0.427,0.349
+				shear	0,-.22
+			}
+		}
+		windowDef d_gas_amount
+		{
+			rect	526,427,58,31
+			visible	0
+		}
+		windowDef gas_amount
+		{
+			rect	528,429,52,26
+			visible	1
+			forecolor	0.866,0.921,0.764,1
+			text	"gui::player_gas"
+			textscale	0.5
+			font	"fonts/chain"
+			shear	0,-.22
+			textalign	2
+			notime	1
+			
+			onTime 0
+			{
+				transition "forecolor" "$desktop::white" "$desktop::typecolor" "250" ;
+				transition "rect" "$d_gas_amount::rect" "$gas_amount::rect" "250" ;
+				transition "textscale" "0.6" "0.5" "250" ;
+				
+				transition "icon_armorvest::matcolor" "$desktop::white" "$desktop::armoricon" "250" ;
+			}
+		}
+		
+		
+		windowDef icon_armorvest
+		{
+			rect	560,458,16,16
+			visible	1
+			background	"gfx/guis/hud/icons/item_armor"
+			matcolor	0.658,0.639,0.376,0.6
+		}
+	}	
 //-----------------------		
 // ammo
 //-----------------------		

@@ -967,7 +967,7 @@ bool idInventory::Give( idPlayer *owner, const idDict &spawnArgs, const char *st
 				}
 			}
 
- 			if ( !gameLocal.world->spawnArgs.GetBool( "no_Weapons" ) || ( weaponName == "weapon_fists" ) ) {
+ 			if ( !gameLocal.world->spawnArgs.GetBool( "no_Weapons" ) || ( weaponName == "weapon_gauntlet" ) ) {
  				if ( ( weapons & ( 1 << i ) ) == 0 || gameLocal.isMultiplayer ) {
 					if ( ( owner->GetUserInfo()->GetBool( "ui_autoSwitch" ) 
 						|| ( gameLocal.isMultiplayer && gameLocal.mpGame.IsBuyingAllowedInTheCurrentGameMode() ) )
@@ -2000,6 +2000,7 @@ void idPlayer::Spawn( void ) {
 		}
 // RAVEN BEGIN
 // mekberg: set to blaster now and disable the weapon.
+		//idealWeapon = SlotForWeapon("weapon_gauntlet");
 		idealWeapon = SlotForWeapon ( "weapon_blaster" ); 
 		Event_DisableWeapon( );
 // RAVEN END
@@ -3423,11 +3424,19 @@ void idPlayer::UpdateHudStats( idUserInterface *_hud ) {
 		_hud->HandleNamedEvent ( "updateHealth" );
 	}
 	temp = _hud->State().GetInt("player_armor", "-1");
-	if (temp != (int)physicsObj.getGas()) {
-		_hud->SetStateInt("player_armorDelta", temp == -1 ? 0 : (temp - (int)physicsObj.getGas()));
-		_hud->SetStateInt("player_armor", (int)physicsObj.getGas());
-		_hud->SetStateFloat("player_armorpct", idMath::ClampFloat(0.0f, 1.0f, physicsObj.getGas() / 50.0f));
+	if (temp != inventory.armor) {
+		_hud->SetStateInt("player_armorDelta", temp == -1 ? 0 : (temp - inventory.armor));
+		_hud->SetStateInt("player_armor", inventory.armor);
+		_hud->SetStateFloat("player_armorpct", idMath::ClampFloat(0.0f, 1.0f, (float)inventory.armor / (float)inventory.maxarmor));
 		_hud->HandleNamedEvent("updateArmor");
+	}
+
+	temp = _hud->State().GetInt("player_gas", "-1");
+	if (temp != (int)physicsObj.getGas()) {
+		_hud->SetStateInt("player_gasDelta", temp == -1 ? 0 : (temp - (int)physicsObj.getGas()));
+		_hud->SetStateInt("player_gas", (int)physicsObj.getGas());
+		_hud->SetStateFloat("player_gaspct", idMath::ClampFloat(0.0f, 1.0f, physicsObj.getGas() / 50.0f));
+		_hud->HandleNamedEvent("updateGas");
 	}
 		//default armor info
 	/*
@@ -8490,7 +8499,7 @@ void idPlayer::PerformImpulse( int impulse ) {
 		ClientSendEvent( EVENT_IMPULSE, &msg );
 	}
 
-	if ( impulse >= IMPULSE_0 && impulse < IMPULSE_12 ) { //changed from <= IMPULSE_12
+	if ( impulse >= IMPULSE_0 && impulse <= IMPULSE_12 ) { //changed from <= IMPULSE_12
 		SelectWeapon( impulse, false );
 		return;
 	}
@@ -10123,6 +10132,13 @@ void idPlayer::CalcDamagePoints( idEntity *inflictor, idEntity *attacker, const 
  		&& player->team == team ) {
  			damage = 0;
  	}
+	//krg25 take no damage from my own rockets
+
+
+	if (attacker == this && inflictor->IsType(idProjectile::GetClassType())) {
+		damage = 0;
+		armorSave = 0;
+	}
 
 	*health = damage;
 	*armor = armorSave;
@@ -10152,7 +10168,9 @@ void idPlayer::Damage( idEntity *inflictor, idEntity *attacker, const idVec3 &di
  	int			knockback;
  	idVec3		damage_from;
  	float		attackerPushScale;
-
+	if (inflictor) {
+		gameLocal.Printf(inflictor->name);
+	}
 	// RAVEN BEGIN
 	// twhitaker: difficulty levels
 	float modifiedDamageScale = damageScale;
@@ -10232,13 +10250,16 @@ void idPlayer::Damage( idEntity *inflictor, idEntity *attacker, const idVec3 &di
 	if( gameLocal.isMultiplayer && gameLocal.IsTeamGame() ) {
 		damageDef->dict.GetInt( "knockback_team", va( "%d", knockback ), knockback );
 	}
-
+	
 	knockback *= damageScale;
 
-	if ( knockback != 0 && !fl.noknockback ) {
-		if ( !gameLocal.isMultiplayer && attacker == this ) {
-			//In SP, no knockback from your own stuff
-			knockback = 0;
+	if ( knockback != 0 && !fl.noknockback) {
+	
+		if ( !gameLocal.isMultiplayer && attacker == this && !inflictor->IsType(idProjectile::GetClassType())) {
+				//In SP, no knockback from your own stuff
+				knockback = 0;
+
+
 		} else {
 			if ( attacker != this ) {
 				attackerPushScale = 1.0f;	
