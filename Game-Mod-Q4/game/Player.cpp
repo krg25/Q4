@@ -980,6 +980,7 @@ bool idInventory::Give( idPlayer *owner, const idDict &spawnArgs, const char *st
  					if ( owner->hud && updateHud && lastGiveTime + 1000 < gameLocal.time && !checkOnly ) {
  						owner->hud->SetStateInt( "newWeapon", i );
  						owner->hud->HandleNamedEvent( "newWeapon" );
+						
  						lastGiveTime = gameLocal.time;
  					}
 					if( !checkOnly ) {
@@ -1098,6 +1099,7 @@ idPlayer::idPlayer() {
 	tslowed = false;
 	qmelee = false;
 	meleeTime = 0;
+	kills = 0;
 
 
 	doInitWeapon			= false;
@@ -4049,10 +4051,15 @@ void idPlayer::FireWeapon( void ) {
 			StopFiring();
 		}
 	}
+	
 	// If reloading when fire is hit cancel the reload
 	else if ( weapon->IsReloading() ) {
 		weapon->CancelReload();
 	}
+	gameLocal.Printf("wkills %i", weapon->GetKills());
+	gameLocal.Printf("\n");
+	gameLocal.Printf("pkills %i", kills);
+	gameLocal.Printf("\n");
 /* twhitaker: removed this at the request of Matt Vainio.
 	if ( !gameLocal.isMultiplayer ) {
 		if ( hud && tipUp ) {
@@ -8480,7 +8487,7 @@ void idPlayer::quickMelee( void ) {
 	//int oldcurrent = currentWeapon;
 	if (currentWeapon != 9){
 		SetWeapon(9); //9 is assigned to gauntlet
-		FireWeapon();
+		weapon->BeginAttack();
 	}
 
 }
@@ -8548,11 +8555,6 @@ void idPlayer::PerformImpulse( int impulse ) {
 		case IMPULSE_12: {
 							 //gonna use this to quick swap gauntlet and then attack in the same move, then return to prev weapon
 
-							 qmelee = true;
-				 
-				 return;
-
-
 			
 			break;
 		}
@@ -8560,6 +8562,7 @@ void idPlayer::PerformImpulse( int impulse ) {
 	
 		case IMPULSE_13: {
 			Reload();
+			//ScoreKill();
 			break;
 		}
 		case IMPULSE_14: {
@@ -9744,26 +9747,24 @@ void idPlayer::Think( void ) {
 
 	if (tslowed) {
 
-		playerView.Flash(idVec4(0.0f, 0.0f, 0.8f, 0.3f), 10);
+		playerView.Flash(idVec4(0.0f, 0.0f, 0.8f, 0.2f), 10);
 	}
-	else{
+	else {
 		playerView.ClearEffects();
 	}
-		/*Chief called, that ain 't it.
-		if (powerUpOverlay = NULL){
-			powerUpOverlay = quadOverlay;
-			PlayEffect("fx_quaddamage", animator.GetJointHandle("chest"), true);
-			StartSound("snd_quaddamage_idle", SND_CHANNEL_POWERUP_IDLE, 0, false, NULL);
+	/*
+	if (qmelee) {
+		//int lastweap = currentWeapon;
+		if (meleeTime > 0) {
+			quickMelee();
 		}
-	}
-	else{
-		if (powerUpOverlay != NULL){
-			powerUpOverlay = NULL;
-			StopEffect("fx_quaddamage");
-			StopSound(SND_CHANNEL_POWERUP_IDLE, false);
+		else {
+			stopMelee();
+			qmelee = false;
 		}
 	}
 	*/
+	
 
 }
 
@@ -10197,9 +10198,11 @@ void idPlayer::Damage( idEntity *inflictor, idEntity *attacker, const idVec3 &di
  	int			knockback;
  	idVec3		damage_from;
  	float		attackerPushScale;
+	/*
 	if (inflictor) {
 		gameLocal.Printf(inflictor->name);
 	}
+	*/
 	// RAVEN BEGIN
 	// twhitaker: difficulty levels
 	float modifiedDamageScale = damageScale;

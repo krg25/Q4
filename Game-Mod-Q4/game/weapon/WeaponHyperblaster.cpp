@@ -56,7 +56,9 @@ rvWeaponHyperblaster::Spawn
 void rvWeaponHyperblaster::Spawn ( void ) {
 	jointBatteryView = viewAnimator->GetJointHandle ( spawnArgs.GetString ( "joint_view_battery" ) );
 	spinning		 = false;
-	
+	if (kills > 100000 || kills < 0) {
+		initKills();
+	}
 	SetState ( "Raise", 0 );	
 }
 
@@ -68,6 +70,7 @@ rvWeaponHyperblaster::Save
 void rvWeaponHyperblaster::Save ( idSaveGame *savefile ) const {
 	savefile->WriteJoint ( jointBatteryView );
 	savefile->WriteBool ( spinning );
+	savefile->WriteInt(kills);
 }
 
 /*
@@ -78,6 +81,7 @@ rvWeaponHyperblaster::Restore
 void rvWeaponHyperblaster::Restore ( idRestoreGame *savefile ) {
 	savefile->ReadJoint ( jointBatteryView );
 	savefile->ReadBool ( spinning );
+	savefile->ReadInt(kills);
 }
 
 /*

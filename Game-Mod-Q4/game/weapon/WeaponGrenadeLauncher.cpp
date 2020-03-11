@@ -49,6 +49,9 @@ rvWeaponGrenadeLauncher::Spawn
 */
 void rvWeaponGrenadeLauncher::Spawn ( void ) {
 	SetState ( "Raise", 0 );	
+	if (kills > 100000 || kills < 0) {
+		initKills();
+	}
 }
 
 /*
@@ -57,6 +60,7 @@ rvWeaponGrenadeLauncher::PreSave
 ================
 */
 void rvWeaponGrenadeLauncher::PreSave ( void ) {
+
 }
 
 /*

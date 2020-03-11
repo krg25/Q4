@@ -273,7 +273,7 @@ entityDef projectile_blaster
 								
 	"decal_bounce"				""
 	"decal_size"				"8"
-								
+	"gib"						"1"
 	"fx_fly"					"effects/weapons/blaster/fly.fx"
 	"fx_impact"					"effects/weapons/blaster/impact_default.fx"
 	"fx_impact_water"			"effects/ambient/splash_smll.fx"
@@ -321,6 +321,7 @@ entityDef damage_blaster
 	"deathPush"					"100"
 	"deathPushMin"				"2000 250"
 	"deathPushMax"				"5000 500"
+		"gib"						"1"
 }
 
 entityDef damage_blaster_charged

@@ -381,7 +381,7 @@ entityDef damage_pellet
 	"damage"					"14"
 
 	"splat_size"				"128"
-	
+	"gib"						"1"
 	"deathPush"					"100"
 	"deathPushMin"				"4000 500"
 	"deathPushMax"				"9000 600"

@@ -43,7 +43,7 @@ public:
 
 	// Init
 	void					Spawn						( void );
-
+	
 	// save games
 	void					Save						( idSaveGame *savefile ) const;					// archives object for save game file
 	void					Restore						( idRestoreGame *savefile );					// unarchives object from save game file
@@ -132,6 +132,7 @@ public:
 
 	// Virtual overrides
 	void				Spawn						( void );
+	void				initKills(void) { kills = 0; }
 	virtual void		Think						( void );
 	virtual void		CleanupWeapon				( void ) {}
 	virtual void		WriteToSnapshot				( idBitMsgDelta &msg ) const;
@@ -254,6 +255,9 @@ protected:
 	void				FindViewModelPositionStyle	( idVec3& viewOffset, idAngles& viewAngles ) const;
 
 public:
+	//krg
+	int GetKills(void);
+	void AddKill(void);
 
 	void				InitLights					( void );
 	void				InitWorldModel				( void );
@@ -336,6 +340,11 @@ public:
 	float							spread;
 	int								nextAttackTime;
 
+	//krg25
+	int								kills;
+
+
+
 	// we maintain local copies of the projectile and brass dictionaries so they
 	// do not have to be copied across the DLL boundary when entities are spawned
 	idDict							attackAltDict;
@@ -417,6 +426,8 @@ protected:
 	rvStateThread					stateThread;
 	int								animDoneTime[ANIM_NumAnimChannels];
 
+
+
 private:
 
 	stateResult_t			State_Raise				( const stateParms_t& parms );
@@ -433,7 +444,16 @@ private:
 	int						hitscanAttackDef;
 
 	CLASS_STATES_PROTOTYPE ( rvWeapon );
+
 };
+ID_INLINE int rvWeapon::GetKills(void) {
+	return kills;
+}
+
+ID_INLINE void rvWeapon::AddKill(void) {
+	kills = kills+1;
+	return;
+}
 
 ID_INLINE rvViewWeapon* rvWeapon::GetViewModel ( void ) const {
 	return viewModel.GetEntity();

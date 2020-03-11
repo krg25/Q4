@@ -1,10 +1,12 @@
-﻿Build started 3/10/2020 11:10:04 AM.
-     1>Project "C:\Users\PC\test\Q4a\Game-Mod-Q4\game.vcxproj" on node 2 (Build target(s)).
+﻿Build started 3/8/2020 3:55:56 PM.
+     1>Project "C:\Users\PC\test\q4\Game-Mod-Q4\game.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (../projectile-conversion/) contains files shared from another project (idLib.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W4 /WX- /Od /Oy- /D _DEBUG /D _WINDOWS /D GAME_DLL /D Q4SDK /D _WINDLL /D _MBCS /Gm- /EHsc /RTC1 /MTd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /GR /Yu /Fp"../projectile-conversion/game/game.pch" /Fo"../projectile-conversion/game/" /Fd"../projectile-conversion/gamex86.pdb" /Gd /TP /analyze- /errorReport:prompt game\Player.cpp
-         Player.cpp
-     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(1186,5): warning MSB8012: TargetPath(C:\Users\PC\test\Q4a\Game-Mod-Q4\../projectile-conversion/game.dll) does not match the Linker's OutputFile property value (C:\Users\PC\test\Q4a\projectile-conversion\gamex86.dll). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W4 /WX- /Od /Oy- /D _DEBUG /D _WINDOWS /D GAME_DLL /D Q4SDK /D _WINDLL /D _MBCS /Gm- /EHsc /RTC1 /MTd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /GR /Yu /Fp"../projectile-conversion/game/game.pch" /Fo"../projectile-conversion/game/" /Fd"../projectile-conversion/gamex86.pdb" /Gd /TP /analyze- /errorReport:prompt game\physics\Physics_Player.cpp
+         Physics_Player.cpp
+     1>c:\users\pc\test\q4\game-mod-q4\game\physics\physics_player.cpp(1): warning C4627: '#include "../../idlib/precompiled.h"': skipped when looking for precompiled header use
+                 Add directive to 'precompiled header (.h) file' or rebuild precompiled header
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(1186,5): warning MSB8012: TargetPath(C:\Users\PC\test\q4\Game-Mod-Q4\../projectile-conversion/game.dll) does not match the Linker's OutputFile property value (C:\Users\PC\test\q4\projectile-conversion\gamex86.dll). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(1188,5): warning MSB8012: TargetName(game) does not match the Linker's OutputFile property value (gamex86). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"../projectile-conversion/gamex86.dll" /INCREMENTAL /NOLOGO "../projectile-conversion/idLib.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /DEF:".\game\game.def" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"../projectile-conversion/gamex86.pdb" /STACK:"16000000","16000000" /LARGEADDRESSAWARE /TLBID:1 /BASE:"0x20000000" /DYNAMICBASE /NXCOMPAT /MACHINE:X86 /SAFESEH /FIXED:no /DLL "../projectile-conversion/game/Actor.obj"
@@ -166,12 +168,10 @@
          "../projectile-conversion/game/StatEvent.obj"
          "../projectile-conversion/game/StatManager.obj"
          "../projectile-conversion/game/StatWindow.obj"
-         "C:\Users\PC\test\Q4a\projectile-conversion\idLib.lib"
-     1>Actor.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
-            Creating library ../projectile-conversion/gamex86.lib and object ../projectile-conversion/gamex86.exp
-         game.vcxproj -> C:\Users\PC\test\Q4a\Game-Mod-Q4\../projectile-conversion/game.dll
-     1>Done Building Project "C:\Users\PC\test\Q4a\Game-Mod-Q4\game.vcxproj" (Build target(s)).
+         "C:\Users\PC\test\q4\projectile-conversion\idLib.lib"
+         game.vcxproj -> C:\Users\PC\test\q4\Game-Mod-Q4\../projectile-conversion/game.dll
+     1>Done Building Project "C:\Users\PC\test\q4\Game-Mod-Q4\game.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:05.52
+Time Elapsed 00:00:01.71

@@ -321,7 +321,6 @@ entityDef weaponmod_rocketlauncher_homing
 entityDef projectile_rocket
 {
 	"spawnclass"				"idProjectile"
-
 	"size"						"7 7 7"
 	"cone"						"2"
 	"noshadows"					"1"

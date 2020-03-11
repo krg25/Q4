@@ -86,6 +86,9 @@ void WeaponNapalmGun::Spawn( void ) {
 	idAnimator* animator = viewModel->GetAnimator();
 	assert(animator);
 
+	if (kills > 100000 || kills < 0) {
+		initKills();
+	}
 	SetState( "Raise", 0 );	
 
     for(int i = 0; i < NAPALM_GUN_NUM_CYLINDERS; ++i)
@@ -207,6 +210,7 @@ void WeaponNapalmGun::Save( idSaveGame *saveFile ) const
 
 	saveFile->WriteInt(cylinderMoveTime);
 	saveFile->WriteInt(previousAmmo);
+	saveFile->WriteInt(kills);
 }
 
 /*
@@ -222,7 +226,7 @@ void WeaponNapalmGun::Restore( idRestoreGame *saveFile ) {
 		saveFile->ReadInterpolate(cylinderOffsets[i]);
 		saveFile->ReadJoint(cylinderJoints[i]);
 	}
-
+	saveFile->ReadInt(kills);
 	saveFile->ReadInt(cylinderMoveTime);
 	saveFile->ReadInt(previousAmmo);
 }

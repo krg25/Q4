@@ -147,6 +147,7 @@ rvWeaponBlaster::Spawn
 */
 void rvWeaponBlaster::Spawn ( void ) {
 	viewModel->SetShaderParm ( BLASTER_SPARM_CHARGEGLOW, 0 );
+	
 	SetState ( "Raise", 0 );
 	
 	chargeGlow   = spawnArgs.GetVec2 ( "chargeGlow" );
@@ -155,6 +156,9 @@ void rvWeaponBlaster::Spawn ( void ) {
 
 	fireHeldTime		= 0;
 	fireForced			= false;
+	if (kills > 100000 || kills < 0) {
+		initKills();
+	}
 			
 	Flashlight ( owner->IsFlashlightOn() );
 }

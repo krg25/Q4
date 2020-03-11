@@ -196,6 +196,7 @@ class idInventory {
 public:
 	int						maxHealth;
 	int						weapons;
+	
 // RITUAL BEGIN
 // squirrel: Mode-agnostic buymenus
 	int						carryOverWeapons;
@@ -688,6 +689,7 @@ public:
  	bool					IsInTeleport	( void );
 	bool					IsZoomed		( void );
 	bool					IsFlashlightOn	( void );
+	void ScoreKill(void);
 	bool					IsSlowed		( void );
 	void 					SetSlowed(bool);
 
@@ -1165,6 +1167,7 @@ private:
 	bool					tslowed;
 	bool					qmelee;
 	int						meleeTime;
+	int kills;
 
 
 
@@ -1206,7 +1209,11 @@ private:
  	CLASS_STATES_PROTOTYPE( idPlayer );
 
 };
-
+ID_INLINE void idPlayer::ScoreKill( void ) {
+	weapon->AddKill();
+	kills += 1;
+	return; //krg: add logic for scoring a kill here?
+}
 ID_INLINE bool idPlayer::IsSlowed(void) {
 	return tslowed;
 }

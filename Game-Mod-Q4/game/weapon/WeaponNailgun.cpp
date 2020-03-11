@@ -120,7 +120,9 @@ void rvWeaponNailgun::Spawn ( void ) {
 	spawnArgs.GetFloat ( "lockRange", "1000", guideRange );
 	guideHoldTime = SEC2MS ( spawnArgs.GetFloat ( "lockHoldTime", "10" ) );
 	guideAquireTime = SEC2MS ( spawnArgs.GetFloat ( "lockAquireTime", ".1" ) );
-	
+	if (kills > 100000 || kills < 0) {
+		initKills();
+	}
 	jointDrumView		= viewAnimator->GetJointHandle ( spawnArgs.GetString ( "joint_view_drum" ) );
 	jointPinsView		= viewAnimator->GetJointHandle ( spawnArgs.GetString ( "joint_view_pins" ) );
 	jointSteamRightView = viewAnimator->GetJointHandle ( spawnArgs.GetString ( "joint_view_steamRight" ) );
@@ -160,6 +162,7 @@ void rvWeaponNailgun::Save ( idSaveGame *savefile ) const {
 	savefile->WriteInt ( drumSpeed );
 	savefile->WriteInt ( drumSpeedIdeal );
 	savefile->WriteFloat ( drumMultiplier );
+	savefile->WriteInt(kills);
 }
 
 /*
@@ -176,6 +179,7 @@ void rvWeaponNailgun::Restore ( idRestoreGame *savefile ) {
 	savefile->ReadFloat ( guideRange );
 	savefile->ReadInt ( guideHoldTime );
 	savefile->ReadInt ( guideAquireTime );
+	savefile->ReadInt(kills);
 
 	savefile->ReadJoint ( jointDrumView );
 	savefile->ReadJoint ( jointPinsView );

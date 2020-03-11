@@ -64,6 +64,7 @@ void rvViewWeapon::Spawn( void ) {
 	GetPhysics()->SetContents( 0 );
 	GetPhysics()->SetClipMask( 0 );
 	GetPhysics()->SetClipModel( NULL, 1.0f );
+
 }
 
 /*

@@ -49,7 +49,9 @@ rvWeaponShotgun::Spawn
 */
 void rvWeaponShotgun::Spawn( void ) {
 	hitscans   = spawnArgs.GetFloat( "hitscans" );
-	
+	if (kills > 100000 || kills < 0) {
+		initKills();
+	}
 	SetState( "Raise", 0 );	
 }
 
@@ -59,6 +61,7 @@ rvWeaponShotgun::Save
 ================
 */
 void rvWeaponShotgun::Save( idSaveGame *savefile ) const {
+	savefile->WriteInt(kills);
 }
 
 /*
@@ -68,6 +71,7 @@ rvWeaponShotgun::Restore
 */
 void rvWeaponShotgun::Restore( idRestoreGame *savefile ) {
 	hitscans   = spawnArgs.GetFloat( "hitscans" );
+	savefile->ReadInt(kills);
 }
 
 /*

@@ -54,6 +54,9 @@ rvWeaponRailgun::Spawn
 */
 void rvWeaponRailgun::Spawn ( void ) {
 	SetState ( "Raise", 0 );	
+	if (kills > 100000 || kills < 0) {
+		initKills();
+	}
 }
 
 /*
@@ -63,6 +66,7 @@ rvWeaponRailgun::Save
 */
 void rvWeaponRailgun::Save ( idSaveGame *savefile ) const {
 	savefile->WriteJoint( jointBatteryView );
+	savefile->WriteInt(kills);
 }
 
 /*
@@ -72,6 +76,7 @@ rvWeaponRailgun::Restore
 */
 void rvWeaponRailgun::Restore ( idRestoreGame *savefile ) {
 	savefile->ReadJoint( jointBatteryView );
+	savefile->ReadInt(kills);
 }
 
 /*

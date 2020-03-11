@@ -58,6 +58,9 @@ void rvWeaponMachinegun::Spawn ( void ) {
 		
 	SetState ( "Raise", 0 );	
 	
+	if (kills > 100000 || kills < 0) {
+		initKills();
+	}
 	Flashlight ( owner->IsFlashlightOn() );
 }
 
@@ -69,6 +72,7 @@ rvWeaponMachinegun::Save
 void rvWeaponMachinegun::Save ( idSaveGame *savefile ) const {
 	savefile->WriteFloat ( spreadZoom );
 	savefile->WriteBool ( fireHeld );
+	savefile->WriteInt(kills);
 }
 
 /*
@@ -79,6 +83,7 @@ rvWeaponMachinegun::Restore
 void rvWeaponMachinegun::Restore ( idRestoreGame *savefile ) {
 	savefile->ReadFloat ( spreadZoom );
 	savefile->ReadBool ( fireHeld );
+	savefile->ReadInt(kills);
 }
 
 /*

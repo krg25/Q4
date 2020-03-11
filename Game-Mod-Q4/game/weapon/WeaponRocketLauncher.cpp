@@ -94,6 +94,9 @@ rvWeaponRocketLauncher::Spawn
 void rvWeaponRocketLauncher::Spawn ( void ) {
 	float f;
 
+	if (kills > 100000 || kills < 0) {
+		initKills();
+	}
 	idleEmpty = false;
 	
 	spawnArgs.GetFloat ( "lockRange", "0", guideRange );
@@ -256,6 +259,8 @@ void rvWeaponRocketLauncher::Save( idSaveGame *saveFile ) const {
 	saveFile->WriteFloat( guideAccelTime );
 	
 	saveFile->WriteFloat ( reloadRate );
+	saveFile->WriteInt(kills);
+	
 	
 	rocketThread.Save( saveFile );
 }
@@ -280,7 +285,7 @@ void rvWeaponRocketLauncher::Restore( idRestoreGame *saveFile ) {
 		saveFile->ReadObject( reinterpret_cast<idClass *&>(ent) );
 		guideEnts[ ix ] = ent;
 	}
-	
+	saveFile->ReadInt(kills);
 	saveFile->ReadFloat( guideSpeedSlow );
 	saveFile->ReadFloat( guideSpeedFast );
 	saveFile->ReadFloat( guideRange );

@@ -136,7 +136,9 @@ void rvWeaponLightningGun::Spawn( void ) {
 	
 	trailEffectView = NULL;
 	nextCrawlTime	= 0;
-
+	if (kills > 100000 || kills < 0) {
+		initKills();
+	}
 	chainLightning.Clear( );
 	
 	// get hitscan range for our firing
@@ -190,6 +192,7 @@ void rvWeaponLightningGun::Save	( idSaveGame* savefile ) const {
 	savefile->WriteFloat ( range );
 	savefile->WriteJoint ( spireJointView );
 	savefile->WriteJoint ( chestJointView );
+	savefile->WriteInt(kills);
 
 	currentPath.Save ( savefile );
 	
@@ -227,6 +230,7 @@ void rvWeaponLightningGun::Restore ( idRestoreGame* savefile ) {
 	savefile->ReadFloat ( tubeMaxOffset );
 	savefile->ReadFloat ( tubeThreshold );
 	savefile->ReadInt ( tubeTime );
+	savefile->ReadInt(kills);
 	
 	// General
 	trailEffectView.Restore ( savefile );

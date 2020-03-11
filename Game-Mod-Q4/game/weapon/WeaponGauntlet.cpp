@@ -99,10 +99,13 @@ void rvWeaponGauntlet::Spawn ( void ) {
 	bladeAccel		= SEC2MS ( spawnArgs.GetFloat ( "blade_accel", ".25" ) );
 	
 	range			= spawnArgs.GetFloat ( "range", "32" );
-
+	if (kills > 100000 || kills < 0) {
+		initKills();
+	}
 	impactMaterial = -1;
 	impactEffect   = NULL;
 	loopSound = LOOP_NONE;
+
 }
 
 /*
