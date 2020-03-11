@@ -9,9 +9,13 @@ kills are tracked but currently not used and not transferring between levels
 2: Movement abilities:
 
 Sprint - Working (LSHIFT)
+
 Melee - Implemented gauntlet weapon to singleplayer, working (MOUSE 4 or Keyboard 9)
+
 Jetpack - Working complete with GUI gas meter (SPACE)
+
 Rocketjump - working, works with rocketlauncher, napalmgun
+
 Dodgeroll - Not implimented
 
 3: Bullet time
