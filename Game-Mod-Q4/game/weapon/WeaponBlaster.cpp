@@ -156,9 +156,9 @@ void rvWeaponBlaster::Spawn ( void ) {
 
 	fireHeldTime		= 0;
 	fireForced			= false;
-	if (kills > 100000 || kills < 0) {
+
 		initKills();
-	}
+
 			
 	Flashlight ( owner->IsFlashlightOn() );
 }
@@ -429,13 +429,13 @@ stateResult_t rvWeaponBlaster::State_Fire ( const stateParms_t& parms ) {
 			}
 
 
-	
+			//gameLocal.Printf("%f", (((float)(kills)) / 10.0f));
 			if ( gameLocal.time - fireHeldTime > chargeTime ) {	
-				Attack ( true, 1, spread, 0, 1.0f );
+				Attack ( true, 1, spread, 0, 1.0f+(((float)(kills))/10.0f));
 				PlayEffect ( "fx_chargedflash", barrelJointView, false );
 				PlayAnim( ANIMCHANNEL_ALL, "chargedfire", parms.blendFrames );
 			} else {
-				Attack ( false, 1, spread, 0, 1.0f );
+				Attack ( false, 1, spread, 0, 1.0f + (((float)(kills)) / 10.0f));
 				PlayEffect ( "fx_normalflash", barrelJointView, false );
 				PlayAnim( ANIMCHANNEL_ALL, "fire", parms.blendFrames );
 			}

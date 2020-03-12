@@ -1850,7 +1850,7 @@ void idPlayer::Spawn( void ) {
 		// do this before SetClipModel to get the right bounding box
 		spectating = true;
 	}
-
+	physicsObj.setPkills(0);
 	// set our collision model
 	physicsObj.SetSelf( this );
 	SetClipModel( );
@@ -3445,7 +3445,7 @@ void idPlayer::UpdateHudStats( idUserInterface *_hud ) {
 	if (temp != (int)physicsObj.getGas()) {
 		_hud->SetStateInt("player_gasDelta", temp == -1 ? 0 : (temp - (int)physicsObj.getGas()));
 		_hud->SetStateInt("player_gas", (int)physicsObj.getGas());
-		_hud->SetStateFloat("player_gaspct", idMath::ClampFloat(0.0f, 1.0f, physicsObj.getGas() / 50.0f));
+		_hud->SetStateFloat("player_gaspct", idMath::ClampFloat(0.0f, 1.0f, physicsObj.getGas() / (50.0f + (float)(GetKills() * 2))));
 		_hud->HandleNamedEvent("updateGas");
 	}
 		//default armor info
@@ -4056,10 +4056,12 @@ void idPlayer::FireWeapon( void ) {
 	else if ( weapon->IsReloading() ) {
 		weapon->CancelReload();
 	}
+	/* krg
 	gameLocal.Printf("wkills %i", weapon->GetKills());
 	gameLocal.Printf("\n");
 	gameLocal.Printf("pkills %i", kills);
 	gameLocal.Printf("\n");
+	*/
 /* twhitaker: removed this at the request of Matt Vainio.
 	if ( !gameLocal.isMultiplayer ) {
 		if ( hud && tipUp ) {

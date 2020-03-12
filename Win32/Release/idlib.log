@@ -1,4 +1,4 @@
-﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (../Win32/Release\) contains files shared from another project (game.vcxproj, MPGame.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (../Win32/Release\) contains files shared from another project (Game.vcxproj, MPGame.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   Lib.cpp
 c:\users\k\git\q4\game-mod-q4\idlib\../idlib/Lib.h(120): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
           E:\visual studio\VC\include\string.h(112) : see declaration of 'strcpy'
@@ -280,8 +280,8 @@ idlib\rvMemSys.cpp(7): warning C4627: '#include "../idlib/precompiled.h"': skipp
 c:\users\k\git\q4\game-mod-q4\idlib\math\simd_sse.cpp(2737): warning C4740: flow in or out of inline asm code suppresses global optimization
 c:\users\k\git\q4\game-mod-q4\idlib\math\simd_sse.cpp(2748): warning C4740: flow in or out of inline asm code suppresses global optimization
 c:\users\k\git\q4\game-mod-q4\idlib\math\simd_sse.cpp(2759): warning C4740: flow in or out of inline asm code suppresses global optimization
-c:\users\k\git\q4\game-mod-q4\idlib\math\simd_sse.cpp(2781): warning C4740: flow in or out of inline asm code suppresses global optimization
 c:\users\k\git\q4\game-mod-q4\idlib\math\simd_sse.cpp(2770): warning C4740: flow in or out of inline asm code suppresses global optimization
+c:\users\k\git\q4\game-mod-q4\idlib\math\simd_sse.cpp(2781): warning C4740: flow in or out of inline asm code suppresses global optimization
 c:\users\k\git\q4\game-mod-q4\idlib\math\simd_sse.cpp(2792): warning C4740: flow in or out of inline asm code suppresses global optimization
 c:\users\k\git\q4\game-mod-q4\idlib\math\simd_sse.cpp(2803): warning C4740: flow in or out of inline asm code suppresses global optimization
 c:\users\k\git\q4\game-mod-q4\idlib\math\simd_sse.cpp(2814): warning C4740: flow in or out of inline asm code suppresses global optimization

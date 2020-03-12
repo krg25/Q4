@@ -349,10 +349,11 @@ entityDef projectile_shotgun_pellet
 	"detonate_on_actor"			"1"
 								
 	"impact_gib"				"1"
+	"gib"						"1"
 								
 	"decal_bounce"				""
 	"decal_size"				"8"
-								
+	"fx_fly"					"effects/weapons/blaster/fly.fx"							
 	"fx_impact"				"effects/weapons/shotgun/impact_default.fx"	
 	"fx_impact_water"			"effects/ambient/splash_smll.fx"
 	"fx_impact_concrete"			"effects/weapons/shotgun/impact_concrete.fx"
@@ -369,6 +370,7 @@ entityDef projectile_shotgun_pellet
 	"fx_impact_electronics_mp"		"effects/weapons/shotgun/impact_default_mp.fx"
 	"def_damage"				"damage_pellet"
 	"def_damage_flesh"			"damage_pellet"
+	"fx_path"					"effects/weapons/blaster/trail.fx"
 }
 
 //--------------------------------------------------------------------------------------------------------------------

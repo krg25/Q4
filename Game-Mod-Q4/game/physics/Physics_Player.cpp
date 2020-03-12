@@ -697,8 +697,10 @@ void idPhysics_Player::WalkMove( void ) {
 	float		accelerate;
 	idVec3		oldVelocity, vel;
 	float		oldVel, newVel;
-
-	if (gas < PM_MAXGAS){ gas = gas + 0.5f; }
+	//idPlayer *player;
+	//float kills = (float)(player->GetKills() * 5);
+	//gameLocal.Printf("Kills %f", kills);
+	if (gas < (PM_MAXGAS+(float)(pkills*2))){ gas = gas + 0.5f; }
 
 
 	if ( waterLevel > WATERLEVEL_WAIST && ( viewForward * groundTrace.c.normal ) > 0.0f ) {

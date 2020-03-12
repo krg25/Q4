@@ -117,6 +117,7 @@ public:	// common physics interface
 	bool					IsNoclip( void ) const;
 	bool					IsDead( void ) const;
 	float					getGas(void) const;
+	void					setPkills(int kills);
 // RAVEN END
 
 	void					SetClipModelNoLink( idClipModel *clip );
@@ -125,7 +126,7 @@ private:
 	// player physics state
 	playerPState_t			current;
 	playerPState_t			saved;
-
+	int pkills;
 	// properties
 	float					walkSpeed;
 	float					crouchSpeed;
@@ -202,6 +203,10 @@ ID_INLINE bool idPhysics_Player::IsDead( void ) const {
 }
 ID_INLINE float idPhysics_Player::getGas(void) const {
 	return gas;
+}
+ID_INLINE void idPhysics_Player::setPkills(int kills) {
+	pkills = kills;
+	return;
 }
 
 #endif /* !__PHYSICS_PLAYER_H__ */

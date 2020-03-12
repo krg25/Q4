@@ -406,10 +406,10 @@ entityDef projectile_bullet
 	"detonate_on_actor"			"1"
 								
 	"impact_gib"				"1"
-								
+	"gib"						"1"							
 	"decal_bounce"				""
 	"decal_size"				"8"
-
+	"fx_fly"					"effects/weapons/blaster/fly.fx"
 	"fx_impact"				"effects/weapons/machinegun/impact_default.fx"
 	"fx_impact_water"			"effects/ambient/splash_smll.fx"
 	"fx_impact_concrete"			"effects/weapons/machinegun/impact_concrete.fx"
@@ -425,6 +425,7 @@ entityDef projectile_bullet
 	"fx_impact_glass_mp"			"effects/weapons/machinegun/impact_default_mp.fx"
 	"fx_impact_bpglass_mp"			"effects/weapons/machinegun/impact_default_mp.fx"
 	"fx_impact_electronics_mp"		"effects/weapons/machinegun/impact_default_mp.fx"
+	"fx_path"					"effects/weapons/blaster/trail.fx"
 	
 }
 

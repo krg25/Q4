@@ -94,9 +94,9 @@ rvWeaponRocketLauncher::Spawn
 void rvWeaponRocketLauncher::Spawn ( void ) {
 	float f;
 
-	if (kills > 100000 || kills < 0) {
+
 		initKills();
-	}
+
 	idleEmpty = false;
 	
 	spawnArgs.GetFloat ( "lockRange", "0", guideRange );
@@ -451,7 +451,7 @@ stateResult_t rvWeaponRocketLauncher::State_Fire ( const stateParms_t& parms ) {
 	switch ( parms.stage ) {
 		case STAGE_INIT:
 			nextAttackTime = gameLocal.time + (fireRate * owner->PowerUpModifier ( PMOD_FIRERATE ));		
-			Attack ( false, 1, spread, 0, 1.0f );
+			Attack ( false, 1 + (((float)(kills))), spread, 0, 1.0f + (((float)(kills)) / 10.0f));
 			PlayAnim ( ANIMCHANNEL_LEGS, "fire", parms.blendFrames );	
 			return SRESULT_STAGE ( STAGE_WAIT );
 	

@@ -689,6 +689,7 @@ public:
  	bool					IsInTeleport	( void );
 	bool					IsZoomed		( void );
 	bool					IsFlashlightOn	( void );
+	int GetKills(void);
 	void ScoreKill(void);
 	bool					IsSlowed		( void );
 	void 					SetSlowed(bool);
@@ -814,6 +815,7 @@ public:
 	void					ClampCash( float minCash, float maxCash );
 	void					SetCash( float newCashAmount );
 	void					ResetCash();
+	idPhysics_Player		physicsObj;			// player physics
 // RITUAL END
 
 protected:
@@ -825,7 +827,7 @@ private:
 	jointHandle_t			hipJoint;
 	jointHandle_t			chestJoint;
 
-	idPhysics_Player		physicsObj;			// player physics
+	
 
  	idList<aasLocation_t>	aasLocation;		// for AI tracking the player
 
@@ -1209,9 +1211,19 @@ private:
  	CLASS_STATES_PROTOTYPE( idPlayer );
 
 };
+ID_INLINE int idPlayer::GetKills(void) {
+	
+	return kills;
+
+}
 ID_INLINE void idPlayer::ScoreKill( void ) {
 	weapon->AddKill();
 	kills += 1;
+	physicsObj.setPkills(kills);
+	inventory.maxHealth += 10;
+	health += 10;
+	inventory.maxarmor += 10;
+	inventory.armor += 10;
 	return; //krg: add logic for scoring a kill here?
 }
 ID_INLINE bool idPlayer::IsSlowed(void) {
